@@ -433,6 +433,9 @@ html.js .aparece.visto { opacity: 1; translate: 0 0; }
 .hoja h2 { font-size: 34pt; font-weight: 380; letter-spacing: -0.04em; line-height: 1; }
 .hoja .intro { font-size: 9.5pt; line-height: 1.45; }
 .hoja .bajada { font-size: 13pt; line-height: 1.25; letter-spacing: -0.01em; }
+/* Las direcciones no pasan a mayúsculas: en GitHub Pages la ruta distingue
+   mayúsculas y /MRIVOIR/ da 404 */
+.hoja .url { text-transform: none; letter-spacing: 0; }
 .hoja.tapa h1 { grid-column: 1 / 11; align-self: center; font-size: 54pt; font-weight: 380; letter-spacing: -0.045em; line-height: 1; }
 .hoja.tapa .lista { grid-column: 9 / -1; align-self: end; }
 @media print {
