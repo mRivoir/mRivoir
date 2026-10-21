@@ -251,7 +251,7 @@ figure.con-pie figcaption { padding-top: .6rem; }
   border-bottom: 1px solid var(--linea);
 }
 .perfil-bloque li { padding-block: .22rem; }
-.perfil-bloque .formacion li { display: grid; gap: .1rem; padding-block: 0 .9rem; }
+.perfil-bloque .formacion li { display: grid; gap: .1rem; padding-block: .22rem .7rem; }
 .perfil-bloque .formacion span { font-size: .9375rem; }
 
 .pie-sitio { margin-top: var(--aire); padding-block: 2rem 5rem; row-gap: 1.5rem; border-top: 1px solid var(--linea); }
