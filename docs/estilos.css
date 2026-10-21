@@ -233,12 +233,28 @@ figure.con-pie figcaption { padding-top: .6rem; }
 
 /* ---------- Perfil y pie ---------- */
 
-.perfil { margin-top: var(--aire); padding-top: 2rem; row-gap: 3rem; }
-.perfil > .rotulo { --c: 1 / 6; }
+/* Una ficha: rótulo a la izquierda, contenido desde la columna 8, filas separadas por línea */
+.perfil { margin-top: calc(var(--aire) * .8); }
+.perfil-fila {
+  align-items: baseline;
+  padding-block: 1.1rem clamp(1.75rem, 3.5vw, 3rem);
+  background: linear-gradient(var(--linea), var(--linea)) var(--margen) 0 / calc(100% - 2 * var(--margen)) 1px no-repeat;
+}
+.perfil-fila:first-child { background-image: linear-gradient(var(--tinta), var(--tinta)); padding-top: clamp(2rem, 5vw, 4.5rem); }
+.perfil-fila > .rotulo { --c: 1 / 7; margin: 0; font-weight: inherit; }
+.perfil-fila > :not(.rotulo) { --c: 8 / -1; }
 .perfil .texto-perfil { --c: 8 / 22; display: grid; gap: 1.25rem; font-size: var(--t-medio); line-height: 1.3; letter-spacing: -0.015em; text-wrap: pretty; }
-.perfil .formacion { --c: 8 / 15; }
-.perfil .herramientas { --c: 16 / 23; }
-.perfil li { padding-block: .55rem; border-top: 1px solid var(--linea); display: flex; justify-content: space-between; gap: 1rem; }
+.perfil-lista { display: grid; grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr)); gap: .6rem var(--hueco); }
+.perfil-lista.dos { --n: 2; max-width: 52rem; }
+.perfil-lista.cuatro { --n: 4; }
+.perfil-tabla li {
+  display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) 9rem;
+  gap: var(--hueco); padding-block: .55rem;
+  align-items: baseline;
+}
+.perfil-tabla li + li { border-top: 1px solid var(--linea); }
+.perfil-tabla li:first-child { padding-top: 0; }
+.perfil-tabla .mono { text-align: right; }
 
 .pie-sitio { margin-top: var(--aire); padding-block: 2rem 5rem; row-gap: 1.5rem; border-top: 1px solid var(--linea); }
 .pie-sitio > .rotulo { --c: 1 / 6; }
@@ -379,6 +395,10 @@ html.js .aparece.visto { opacity: 1; translate: 0 0; }
   .cabecera { grid-template-columns: 1fr auto; }
   .cabecera > * { grid-column: auto !important; }
   .apertura { row-gap: 3rem; }
+  .perfil-fila { row-gap: .9rem; }
+  .perfil-lista.cuatro { --n: 2; }
+  .perfil-tabla li { grid-template-columns: 1fr auto; }
+  .perfil-tabla li > :nth-child(2) { grid-row: 2; }
   .obra { row-gap: 0; }
   .sangre-derecha { margin-right: calc(var(--margen) * -1); }
   .caso-cabeza.lateral .hero-lateral { grid-row: auto; margin-inline: 12%; }
