@@ -1,0 +1,2281 @@
+/* ============================================================
+   SISTEMA - estilos.css
+   Manifiesto infográfico
+
+   - Toda la página conserva el estilo "código": verde consola,
+     grilla rígida, bordes rectos y tipografía mono/display.
+   ============================================================ */
+
+/* ===== TOKENS =====
+   Variables raíz fijas del estilo código. */
+:root {
+  /* Acento — verde consola */
+  --accent: #00ff41;
+
+  /* Fondo — negro sólido */
+  --bg: #060807;
+
+  /* Texto base: blanco + tres grises (aclarados para mejor legibilidad) */
+  --fg: #f0ede8;
+  --gris: #adada4;
+  --gris-med: #86867e;
+  --gris-dim: #2e2e2b;
+
+  /* Bordes rectos */
+  --radius: 0px;
+
+  /* Familias tipográficas: display (titulares), mono (código), serif (citas) */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-serif: 'DM Serif Display', serif;
+
+  /* Curva de easing compartida por todas las transiciones (ease-out) */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Curva espejo (ease-in): para que las salidas se sientan igual de suaves
+     que las entradas hechas con --ease */
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+}
+
+/* ===== RESET / BASE ===== */
+
+/* Reset universal: modelo de caja predecible y sin márgenes heredados */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fondo, color y grilla */
+body {
+  position: relative;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  color: var(--fg);
+  font-family: var(--font-mono);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Enlaces sin estilo propio: heredan color y sin subrayado */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Selección de texto: fondo acento, texto oscuro para contraste */
+::selection {
+  background: var(--accent);
+  color: #0a0a0a;
+}
+
+/* Scrollbar fina al tono del acento */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+}
+
+/* Foco accesible visible solo por teclado */
+:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Cursor pointer en zonas interactivas */
+.z1-orb,
+.z1-orb .orb-label,
+.nav-links a,
+.nav-logo,
+.geo-node,
+.z-viz .bar-rect,
+.disc-head,
+.z5-card,
+.zmf-node,
+.z-viz-d-close,
+.zt-item {
+  cursor: pointer;
+}
+
+/* Anclas: que el título no quede tapado por el nav fijo */
+section[id] {
+  scroll-margin-top: 90px;
+}
+
+/* ===== REVEAL =====
+   Animación de entrada al hacer scroll. JS agrega .reveal (estado oculto)
+   y luego .in cuando el elemento entra en viewport. Sin JS no se oculta. */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   TÍTULOS Y ETIQUETAS - TIPOGRAFÍAS CAMBIANTES
+   Estado base: estilo código (display / mono). Al pasar el mouse por
+   encima, cada letra muta a serif en cascada (letra por letra) con un
+   leve fundido de opacidad; al salir vuelven a su estilo código.
+   ============================================================ */
+
+/* Titular (display, gran escala fluida) */
+.morph-title {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 7vw, 96px);
+  line-height: 0.92;
+}
+
+/* Tags //: mono uppercase */
+.morph-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gris-med);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+/* Labels (subtítulos): mono en negrita */
+.morph-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Cada letra se envuelve en un .char (JS) para poder animarla por separado.
+   Los tags (.morph-tag) quedan sin animación, por eso no se incluyen acá. */
+.morph-title .char,
+.morph-label .char {
+  display: inline-block;
+}
+
+/* Animación por letra: de Space Mono a Display. El tiempo es según el índice --i de cada letra. */
+@keyframes morph-char {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  45% {
+    opacity: 0.45;
+    transform: translateY(2px);
+  }
+
+  50% {
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+}
+
+.morph-title.morphed .char,
+.morph-label.morphed .char {
+  animation: morph-char 0.4s var(--ease) forwards;
+  animation-delay: calc(var(--i, 0) * 35ms);
+}
+
+/* ===== LOADER =====
+   Pantalla de carga "COMPILANDO SISTEMA". JS le agrega .out al terminar. */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: #060807;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  transition: opacity 0.6s var(--ease), visibility 0.6s;
+}
+
+/* Estado de salida: se desvanece y deja de bloquear */
+.loader.out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Barra de progreso del loader (contenedor) */
+.loader-bar {
+  width: 180px;
+  height: 1px;
+  background: var(--gris-dim);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Relleno animado de la barra (de izquierda a derecha) */
+.loader-bar::after {
+  content: '';
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  animation: lfill 1.3s var(--ease) forwards;
+}
+
+@keyframes lfill {
+  to {
+    left: 0;
+  }
+}
+
+/* Etiqueta de texto bajo la barra */
+.loader-label {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+/* Cursor "_" parpadeante tipo terminal */
+.blink {
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ===== PROGRESS BAR LATERAL =====
+   Indicador de avance a la derecha con las 5 zonas.
+   Ancho fijo + etiquetas alineadas a la derecha contra el borde: así su borde
+   izquierdo queda a una distancia conocida y la línea (.progress-fill) puede
+   pasar justo a la izquierda de las palabras. pointer-events: none - sin clicks. */
+.progress-track {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 200;
+  width: 4.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+/* Línea vertical que crece con el scroll (altura la fija el JS).
+   Se ubica a la izquierda de la columna de etiquetas, con una separación
+   holgada para que no quede pegada al texto.
+   z-index 0: queda detrás del texto de las secciones. */
+.progress-fill {
+  position: fixed;
+  right: 6.1rem;
+  top: 0;
+  width: 1px;
+  background: var(--accent);
+  height: 0%;
+  z-index: 0;
+}
+
+/* Lista de etiquetas de zona */
+.progress-labels {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cada etiqueta de zona (solo indicador visual) */
+.progress-labels span {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gris-med);
+  padding: 0.25rem 0;
+  transition: color 0.3s;
+}
+
+/* Zona activa resaltada en acento (clase .active vía JS) */
+.progress-labels span.active {
+  color: var(--accent);
+}
+
+/* ===== NAV =====
+   Barra superior fija. Grid de 3 columnas para que los links queden
+   siempre centrados sin importar el ancho variable del nav-state. */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;   /* columnas laterales iguales - los links quedan centrados sin importar el ancho del nav-state */
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 3rem;
+  border-bottom: 0.5px solid transparent;
+  transition: background 0.4s, border-color 0.4s, transform 0.45s var(--ease), opacity 0.45s var(--ease);
+}
+
+/* Mientras la esfera de navegación es visible, la barra superior se oculta
+   para no duplicar la navegación. JS agrega .nav-auto (con JS) y .revealed
+   cuando el orbe deja de verse. Sin JS la barra queda visible siempre. */
+.nav.nav-auto {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  /* Salida con la curva: misma suavidad que la entrada, en reversa */
+  transition: background 0.4s, border-color 0.4s,
+    transform 0.45s var(--ease-in), opacity 0.45s var(--ease-in);
+}
+
+.nav.nav-auto.revealed {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  /* Entrada con ease-out */
+  transition: background 0.4s, border-color 0.4s,
+    transform 0.45s var(--ease), opacity 0.45s var(--ease);
+}
+
+/* Al scrollear: fondo translúcido con blur y borde inferior (clase .scrolled vía JS) */
+.nav.scrolled {
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  border-bottom-color: var(--gris-dim);
+  backdrop-filter: blur(10px);
+}
+
+/* Logo SIS·TE·MA */
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.06em;
+}
+
+/* La sílaba "TE" en acento, tanto en nav como en footer */
+.nav-logo em,
+.footer-logo em {
+  color: var(--accent);
+  font-style: normal;
+}
+
+/* Links centrales (columna central del grid) */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  justify-self: center;
+}
+
+.nav-links a {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gris);
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+/* Indicador de zona // (el JS actualiza su texto) */
+.nav-state {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--gris-med);
+  justify-self: end;          /* anclado a la derecha; su texto cambia de ancho pero no mueve los links */
+  white-space: nowrap;
+}
+
+/* ===== ZONAS BASE =====
+   Contenedor común de cada sección a pantalla completa. */
+.zone {
+  padding: 3.5rem 3rem;
+  position: relative;
+}
+
+/* Zonas con elementos que se salen del marco - recortar desborde */
+.zone.z3,
+.zone.z5 {
+  overflow: hidden;
+}
+
+/* La grilla técnica de fondo es global (ver body), así que es continua
+   hasta el footer. El contenido de cada zona se mantiene por encima. */
+.zone > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero a pantalla completa con el manifiesto */
+.z1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;   /* el hero conserva la altura completa */
+  padding-top: 6.5rem;
+}
+
+/* Glow radial extra detrás del hero (donde va la esfera) */
+.z1-grid-overlay {
+  position: absolute !important;
+  inset: 0;
+  z-index: 0 !important;
+  pointer-events: none;
+  background: radial-gradient(ellipse 70% 70% at 70% 40%, color-mix(in srgb, var(--accent) 5%, transparent) 0%, transparent 60%);
+}
+
+/* Eyebrow: línea + texto que el JS "tipea" carácter a carácter */
+.z1-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gris);
+  margin-bottom: 2rem;
+  min-height: 1.2em;
+}
+
+/* Guion decorativo del eyebrow */
+.eyebrow-line {
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* Título gigante SIS-TE-MA */
+.z1-title {
+  font-family: var(--font-display);
+  font-size: clamp(80px, 18vw, 190px);
+  line-height: 0.87;
+  letter-spacing: 0.01em;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+/* Cada línea del título en bloque propio */
+.z1-tl {
+  display: block;
+}
+
+/* "TE" en acento */
+.z1-tl em {
+  color: var(--accent);
+  font-style: normal;
+}
+
+.z1-swap {
+  display: inline;
+}
+
+/* Altura del glifo no afecta la línea */
+.z1-swap-g {
+  line-height: 0;
+  white-space: nowrap;
+}
+
+/* Variante serif a su tamaño original */
+.z1-swap.z1-swap-serif .z1-swap-g {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+/* Animación de cada cambio: solo opacidad y desenfoque. */
+.z1-swap-g.is-swapping {
+  animation: z1Swap 0.35s var(--ease);
+}
+
+@keyframes z1Swap {
+  0% {
+    opacity: 0;
+    filter: blur(3px);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Metadatos del hero (coordenadas - separador - tag) */
+.z1-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  margin-bottom: 2rem;
+}
+
+.z1-coords {
+  color: var(--gris);
+}
+
+.z1-sep {
+  color: var(--gris-dim);
+}
+
+.z1-tag {
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+/* Cita destacada del hero, en serif con barra de acento */
+.z1-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(15px, 1.7vw, 19px);
+  line-height: 1.8;
+  color: rgba(240, 237, 232, 0.82);
+  max-width: 560px;
+  border-left: 2px solid var(--accent);
+  padding-left: 1.5rem;
+}
+
+/* Atribución de la cita: en su propia línea */
+.z1-quote-cite {
+  display: block;
+  margin-top: 0.85rem;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+.z1-quote-cite::before {
+  content: "— ";
+}
+
+/* Manifiesto: número grande a la izquierda + cuerpo de texto */
+.z1-manifesto {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) minmax(280px, 360px);
+  gap: 3rem;
+  align-items: start;
+  margin-top: 2.5rem;
+  padding-top: 2.75rem;
+  border-top: 0.5px solid var(--gris-dim);
+}
+
+/* Número "01" (con parallax desde JS) */
+.zm-num {
+  font-family: var(--font-display);
+  font-size: clamp(80px, 12vw, 160px);
+  line-height: 1;
+  color: var(--gris-dim);
+  will-change: transform;
+}
+
+/* Tag "// manifiesto" sobre el número. En una sola línea. */
+.zm-tag {
+  white-space: nowrap;
+}
+
+/* Número decorativo de sección (mismo tamaño que el "01", parallax en JS),
+   al lado del título. El padding vertical de la fila le deja lugar para
+   moverse (parallax) sin superponerse con el tag de arriba ni el contenido de abajo. */
+.sec-title-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  flex-wrap: wrap;
+  padding: 1.75rem 0;
+}
+
+.sec-num {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: clamp(80px, 12vw, 160px);
+  line-height: 1;
+  color: var(--gris-dim);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.zm-title {
+  margin-bottom: 2rem;
+}
+
+/* Palabra en verde consola dentro de un título morph. El color lo heredan
+   los .char que genera wrapChars(), así que se mantiene en ambos estados
+   (sin serifa y en serif). */
+.tm-accent {
+  color: var(--accent);
+}
+
+/* Párrafos del manifiesto */
+.zm-para {
+  font-size: 14px;
+  line-height: 2;
+  color: rgba(240, 237, 232, 0.8);
+  margin-bottom: 1.25rem;
+  max-width: 600px;
+}
+
+/* Párrafo de entrada: más grande, más contraste y en serif 
+para destacar. */
+.zm-lead {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.65;
+  color: var(--fg);
+  max-width: 620px;
+  margin-bottom: 1.75rem;
+}
+
+/* Párrafo-cita resaltado en serif */
+.zm-highlight {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16.5px;
+  color: var(--fg);
+  border-left: 2px solid var(--accent);
+  padding-left: 1.25rem;
+  line-height: 1.8;
+}
+
+/* Bloque "por qué SISTEMA": tercera columna del manifiesto, alineada al nivel
+   del título. Colapsable: colapsado solo se ve el título (verde); al hacer
+   click el texto aparece abajo, tabeado a la izquierda, en caja punteada.
+   El colapso lo habilita el JS (.collapsible); sin JS el texto queda visible. */
+.z1-why {
+  min-width: 0;
+  position: relative;   /* contexto para el conector "L" */
+  text-align: right;    /* empuja el título (inline-block) a la derecha */
+  /* Baja el bloque para que ni la etiqueta ni el cuadro desplegado se
+     solapen con el título "El diseño como propósito" de la columna central. */
+  margin-top: clamp(4rem, 9vw, 8rem);
+}
+
+/* Título = botón (siempre visible), verde, alineado a la derecha.
+   inline-block para que su ancho sea el del texto (el conector mide su centro). */
+.why-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: default;
+  transition: opacity 0.2s var(--ease);
+}
+
+.z1-why.collapsible .why-label {
+  cursor: pointer;
+}
+
+.z1-why.collapsible .why-label:hover {
+  opacity: 0.75;
+}
+
+.why-label:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Indicador [+] / [–] solo cuando el colapso está activo (con JS) */
+.z1-why.collapsible .why-label::after {
+  content: ' [+]';
+  opacity: 0.7;
+}
+
+.z1-why.collapsible.is-open .why-label::after {
+  content: ' [–]';
+}
+
+/* Texto: caja punteada.
+   Fondo negro sólido: cubre el manifiesto y la grilla que quedan detrás.
+   margin-right deja lugar a la derecha para la "L" conectora. El desplazamiento
+   izquierdo usa min() para no invadir la columna del número en pantallas chicas. */
+.why-text {
+  margin-top: 1.25rem;
+  margin-left: calc(-1 * min(26rem, 30vw));
+  margin-right: 120px;
+  padding: 1.5rem;
+  border: 1px dashed var(--gris-med);
+  border-radius: var(--radius);
+  background: var(--bg);
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--gris);
+  text-align: justify;   /* el contenedor va a la derecha; el texto, justificado */
+}
+
+/* Conector "L": lo dibuja main.js (mide título y cuadro). Baja desde el
+   centro del título y gira a la izquierda hasta el centro del cuadro. */
+.why-conn {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  opacity: 0;   /* la controla main.js (se muestra al empezar a dibujar la L) */
+  transition: opacity 0.3s var(--ease);
+}
+
+.why-conn-path {
+  fill: none;
+  stroke: var(--gris-med);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Colapsado (solo con JS): sin espacio ni visibilidad. El layout abre/cierra
+   al instante; solo la opacidad y el borde animan (fade del cuadro). */
+.z1-why.collapsible .why-text {
+  max-height: 0;
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-color: transparent;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+
+/* Abierto: el cuadro toma su espacio al instante, pero sigue INVISIBLE
+   (opacity 0, borde transparente) hasta que la "L" termina de dibujarse. */
+.z1-why.collapsible.is-open .why-text {
+  max-height: 460px;
+  margin-top: 1.25rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+/* Revelado: recién ahora aparece el cuadro */
+.z1-why.collapsible.is-open.is-drawn .why-text {
+  opacity: 1;
+  border-color: var(--gris-med);
+}
+
+/* ===== Z2 - ORIGEN (territorio + tiempo) ===== */
+.z2-header {
+  margin-bottom: 2.5rem;
+  padding-top: 1rem;
+}
+
+/* Énfasis en acento dentro de los títulos de Z2/Z3 */
+.z2-title em,
+.z3-title em {
+  color: var(--accent);
+  font-style: normal;
+}
+
+/* Bajada de la sección: misma tipografía que el resto de los subtítulos */
+.z2-intro {
+  font-size: 14px;
+  color: var(--gris);
+  line-height: 1.8;
+  max-width: 520px;
+  margin-top: 1.5rem;
+}
+
+/* Origen (Z2): sin morphing en los títulos dela timeline
+   (.zt-title / morph-label). Conservan su tipografía base pero no cambian a
+   serif al hacer hover. El título de sección "Territorio + tiempo"
+   (.z2-title / morph-title) si mantiene el morphing. */
+.z2 .morph-label.morphed .char {
+  animation: none;
+}
+
+/* Timeline vertical: contenedor relativo para la línea */
+.z2-timeline {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+/* Línea vertical que une los puntos de la timeline */
+.zt-line {
+  position: absolute;
+  left: 89px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--accent);
+  /* Por encima de los bordes horizontales, pero por debajo de
+     los nodos (.zt-dot, z-index: 1) */
+  z-index: 0;
+}
+
+/* Timeline: año | punto | contenido */
+.zt-item {
+  display: grid;
+  grid-template-columns: 56px 20px 1fr;
+  gap: 0 1.5rem;
+  align-items: start;
+  padding: 1.4rem 0;
+  border-bottom: 0.5px solid var(--gris-dim);
+  transition: background 0.3s;
+}
+
+.zt-item:last-child {
+  border-bottom: none;
+}
+
+/* Sin esto el transform que deja el reveal tapa la línea verde con el borde
+   del item. */
+.zt-item.reveal.in {
+  transform: none;
+}
+
+.zt-item:hover {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+/* Año (alineado a la derecha contra la línea) */
+.zt-year {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--gris-med);
+  text-align: right;
+  line-height: 1.2;
+  padding-top: 3px;
+}
+
+/* Punto sobre la línea */
+.zt-dot {
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid var(--gris-med);
+  background: var(--bg);
+  margin: 5px auto 0;
+  position: relative;
+  z-index: 1;
+  border-radius: var(--radius);
+}
+
+/* Punto destacado, relleno de acento */
+.zt-dot-accent {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.zt-title {
+  margin-bottom: 0.35rem;
+}
+
+.zt-desc {
+  font-size: 12px;
+  color: var(--gris);
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+
+/* Chips/etiquetas */
+.zt-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.zt-chips span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border: 0.5px solid var(--gris-med);
+  color: var(--gris);
+  border-radius: var(--radius);
+}
+
+/* Iconos de deporte: archivos SVG (formas rellenas) referenciados con <img> */
+.sport-ico {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  vertical-align: -0.2em;   /* alinea el icono inline (en chips usan flex, se ignora) */
+}
+
+/* Chip resaltado (lugar actual) */
+.chip-accent {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+/* Mapa territorial (recorrido MVD - CRM - COL) */
+/* Origen en dos columnas: línea de tiempo + recorridos */
+.z2-origen-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+/* Línea de tiempo a la izquierda, a la derecha la columna .z2-side con los
+   bloques en 2×2 y el mapa abajo, alineada con la línea de tiempo. */
+.z2-origen-grid {
+  grid-template-columns: 1fr minmax(330px, 430px);
+}
+
+/* Columna derecha: recorridos */
+.z2-mapa {
+  min-width: 0;
+}
+
+.zm-label {
+  margin-bottom: 2rem;
+}
+
+/* Fila de nodos del recorrido con flechas */
+.zm-flow {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Nodo de ciudad */
+.zmf-node {
+  padding: 1.5rem 2rem;
+  border: 0.5px solid var(--gris-dim);
+  border-radius: var(--radius);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.zmf-node:hover {
+  border-color: var(--gris);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Nodo activo (ciudad actual) con borde de acento */
+.zmf-active {
+  border-color: var(--accent);
+}
+
+/* Código de 3 letras de la ciudad */
+.zmf-code {
+  font-family: var(--font-display);
+  font-size: 44px;
+  color: var(--gris-med);
+  line-height: 1;
+}
+
+.zmf-active .zmf-code {
+  color: var(--accent);
+}
+
+.zmf-name {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+}
+
+.zmf-period {
+  font-size: 10px;
+  color: var(--gris);
+  line-height: 1.5;
+  margin-top: 0.25rem;
+}
+
+/* Flecha entre nodos (gira a vertical en mobile) */
+.zmf-arrow {
+  font-size: 20px;
+  color: var(--accent);
+}
+
+/* ===== Recorrido sobre el contorno =====
+   El contorno va de fondo (gris tenue), el recorrido real en línea sólida y los 
+   nodos en verde (acento) con glow. */
+.z2-geomap {
+  order: 2;                          
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 0.5px solid var(--gris-dim);
+}
+
+.z2-geomap-stage {
+  position: relative;
+  max-width: 440px;
+  margin-top: 1.5rem;
+}
+
+.z2-geomap-stage svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Recorrido (sólido) - hairline fino, como las aristas de la esfera */
+.geo-route {
+  fill: none;
+  stroke: color-mix(in srgb, var(--fg) 28%, transparent);
+  stroke-width: 0.7;
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+/* Halo radial verde del nodo */
+#geo-halo-grad stop {
+  stop-color: var(--accent);
+}
+
+.geo-halo {
+  fill: url(#geo-halo-grad);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.2s var(--ease);
+}
+
+/* Punto del nodo en verde con glow */
+.geo-dot {
+  fill: var(--accent);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.2s var(--ease);
+}
+
+/* Etiquetas en verde, mono */
+.geo-label {
+  fill: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 3.4px;
+  letter-spacing: 0.05em;
+}
+
+/* Hover: el nodo se agranda y su halo brilla */
+.geo-node {
+  cursor: pointer;
+}
+
+.geo-node:hover .geo-dot {
+  transform: scale(1.8);
+}
+
+.geo-node:hover .geo-halo {
+  transform: scale(1.4);
+}
+
+/* ===== Bloques clickeables del recorrido =====
+   Cada bloque ilumina su período en verde y dispara la línea animada
+   del mini-mapa (ver main.js). */
+.z2-side {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.z2-route {
+  display: grid;
+  grid-template-columns: 1fr 1fr;    /* bloques interactivos en 2×2 */
+  gap: 0.85rem;
+  order: 1;                          /* los bloques van sobre el mapa */
+}
+
+.z2-rblock {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 1.1rem 1rem;
+  background: var(--bg);
+  border: 0.5px solid var(--gris-dim);
+  border-radius: var(--radius);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.z2-rblock:hover {
+  border-color: var(--gris-med);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.z2-rblock:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Código de 3 letras (display, grande) */
+.rb-code {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 46px;
+  line-height: 0.9;
+  color: var(--gris-med);
+  transition: color 0.3s var(--ease), text-shadow 0.3s var(--ease);
+}
+
+.rb-name {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg);
+  transition: color 0.3s var(--ease);
+}
+
+.rb-period {
+  display: block;
+  margin-top: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--gris);
+  transition: color 0.3s var(--ease);
+}
+
+/* Bloque activo: se enciende en verde (acento) */
+.z2-rblock.is-active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  box-shadow: 0 0 0 0.5px var(--accent), 0 0 26px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.z2-rblock.is-active .rb-code {
+  color: var(--accent);
+  text-shadow: 0 0 18px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+.z2-rblock.is-active .rb-name {
+  color: var(--accent);
+}
+
+.z2-rblock.is-active .rb-period {
+  color: color-mix(in srgb, var(--accent) 75%, var(--fg));
+}
+
+/* Línea verde animada que recorre los nodos del mini-mapa.
+   La geometría ('d') y el desplazamiento del dash los maneja main.js. */
+.geo-trail {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Nodos secundarios (cuadrados): apagados (gris) hasta que la animación pasa
+   sobre ellos, main.js les agrega .is-lit para encenderlos en verde. */
+.geo-sec {
+  fill: var(--gris-med);
+  transition: fill 0.2s var(--ease);
+}
+
+.geo-sec.is-lit {
+  fill: var(--accent);
+  filter: url(#geo-glow);
+}
+
+/* ===== Z3 — DISCIPLINAS (código/diseño) ===== */
+.z3-header {
+  margin-bottom: 2.5rem;
+  padding-top: 1rem;
+}
+
+.z3-title {
+  margin-bottom: 1.5rem;
+}
+
+.z3-intro {
+  font-size: 14px;
+  color: var(--gris);
+  line-height: 1.8;
+  max-width: 520px;
+}
+
+/* Dos disciplinas como carpetas de un sistema, lado a lado. Bordes rectos. 
+Click en el header para desplegar el árbol de información. */
+.z3-tree {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Carpeta */
+.disc {
+  border: 0.5px solid var(--gris-dim);
+  border-left: 2px solid var(--gris-med);
+  background: rgba(255, 255, 255, 0.012);
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+}
+
+.disc-design {
+  border-left-color: color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+.disc.is-open {
+  border-left-color: var(--accent);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Header clickeable (la carpeta) */
+.disc-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  width: 100%;
+  text-align: left;
+  padding: 1.5rem 1.75rem;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.disc-head:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: -3px;
+}
+
+.disc-caret {
+  flex-shrink: 0;
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.disc-caret::before { content: '▸'; }
+.disc.is-open .disc-caret::before { content: '▾'; }
+
+.disc-headmain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.disc-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gris-med);
+}
+
+.disc-path { color: var(--gris); }
+
+.disc-name {
+  font-family: var(--font-display);
+  font-size: 46px;
+  line-height: 1;
+  color: var(--fg);
+}
+
+.disc-code .disc-name,
+.disc-design .disc-name { color: var(--accent); }
+
+/* Cuerpo del árbol (nivel carpeta). Colapso con grid-rows (0fr-1fr): el alto
+   se ajusta solo, incluso cuando se despliegan sub-elementos anidados. */
+.disc-body {
+  display: grid;
+  grid-template-rows: 1fr;   /* sin JS: visible */
+}
+
+.disc-body-inner {
+  min-height: 0;
+  padding: 0.25rem 1.75rem 1.75rem 2.6rem;
+}
+
+.z3-tree.tree-js .disc-body {
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.42s var(--ease);
+}
+
+.z3-tree.tree-js .disc-body-inner {
+  overflow: hidden;
+}
+
+.z3-tree.tree-js .disc.is-open > .disc-body {
+  grid-template-rows: 1fr;
+}
+
+.disc-desc {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--gris-med);
+  margin: 0 0 1.25rem;
+}
+
+/* Árbol de información con conectores */
+.disc-list {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+
+.disc-row {
+  display: flex;
+  gap: 0.55rem;
+}
+
+.disc-branch { flex-shrink: 0; color: var(--gris-med); }
+.disc-year { flex-shrink: 0; min-width: 40px; color: var(--accent); }
+.disc-text { color: var(--gris); }
+
+/* Elemento padre: fila clickeable con su propio caret */
+.disc-parent {
+  width: 100%;
+  padding: 0.15rem 0;
+  text-align: left;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  align-items: baseline;
+}
+
+/* Elementos con sub-elementos (nodos): su etiqueta va en verde */
+.disc-parent .disc-text { color: var(--accent); }
+.disc-parent:hover .disc-text { color: color-mix(in srgb, var(--accent) 55%, #fff); }
+
+.disc-parent:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.disc-caret2 {
+  flex-shrink: 0;
+  width: 0.9em;
+  color: var(--accent);
+}
+
+.disc-caret2::before { content: '▸'; }
+/* Solo el caret del propio nodo abierto (no los anidados) */
+.disc-node.is-open > .disc-parent .disc-caret2::before { content: '▾'; }
+
+/* Espaciador del ancho del caret: alinea las hojas que son hermanas de un
+   nodo con el texto del nodo. */
+.disc-lead { flex-shrink: 0; width: 0.9em; }
+
+/* Sub-elementos: contenedor colapsable (grid-rows), indentado bajo el padre */
+.disc-children {
+  display: grid;
+  grid-template-rows: 1fr;   /* sin JS: visible */
+}
+
+.disc-children-inner {
+  min-height: 0;
+  padding-left: 1.6rem;      /* indentación (en el inner: la cadena no se recorta) */
+}
+
+.z3-tree.tree-js .disc-children {
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s var(--ease);
+}
+
+.z3-tree.tree-js .disc-children-inner {
+  overflow: hidden;
+}
+
+.z3-tree.tree-js .disc-node.is-open > .disc-children {
+  grid-template-rows: 1fr;
+}
+
+/* Error "de sistema" mismo color, en cursiva */
+.disc-err { font-style: italic; }
+
+/* Revelado en cadena: los padres al abrir la carpeta, los hijos al abrir el padre */
+.z3-tree.tree-js .disc.is-open .disc-list > .disc-node,
+.z3-tree.tree-js .disc.is-open .disc-list > .disc-row {
+  animation: tree-in 0.34s var(--ease) backwards;
+  animation-delay: calc(var(--i, 0) * 55ms);
+}
+
+/* Hijos DIRECTOS del nodo abierto, para que la cadena
+   funcione en cada nivel de anidación. */
+.z3-tree.tree-js .disc-node.is-open > .disc-children > .disc-children-inner > .disc-child,
+.z3-tree.tree-js .disc-node.is-open > .disc-children > .disc-children-inner > .disc-node {
+  animation: tree-in 0.3s var(--ease) backwards;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+@keyframes tree-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Chips de herramientas (cards de Obras) */
+.z5c-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.z5c-tools span {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 0.5px solid var(--gris-dim);
+  color: var(--gris-med);
+  border-radius: var(--radius);
+}
+
+/* ===== ZONA HERRAMIENTAS - histograma radial generativo =====
+   Boceto SVG integrado: usa el acento del sitio (var --accent.
+   Todo va scopeado bajo .z-viz para no chocar con clases genéricas. */
+
+/* Cabecera editorial de la sección */
+.z-viz-header {
+  margin-bottom: 1.5rem;
+  padding-top: 1rem;
+}
+
+.z-viz-title {
+  margin-bottom: 1.5rem;
+  /* Al mutar a serif (más ancha), "Las herramientas" no debe partirse en dos
+     líneas; el salto real lo da el <br>. */
+  white-space: nowrap;
+}
+
+/* Énfasis en acento */
+.z-viz-title em {
+  color: var(--accent);
+  font-style: normal;
+}
+
+.z-viz-intro {
+  font-size: 14px;
+  color: var(--gris);
+  line-height: 1.8;
+  max-width: 520px;
+}
+
+/* Escenario: SVG fluido (el ancho/centrado lo maneja .z-viz-main) */
+.z-viz-stage {
+  width: 100%;
+  position: relative;
+}
+
+/* Glow verde ambiental detrás del histograma - el mismo halo de acento
+   que rodea a la esfera de navegación, centrado bajo el gráfico radial. */
+.z-viz-stage::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 48%, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 75%),
+    radial-gradient(circle at 50% 48%, color-mix(in srgb, var(--accent) 5%, transparent) 0%, transparent 95%);
+  filter: blur(70px);
+  transition: opacity .6s var(--ease);
+}
+
+.z-viz-stage svg {
+  position: relative;   /* sobre el glow ambiental */
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;   /* el glow de las barras no se recorta */
+}
+
+/* Anillo guía exterior punteado */
+.viz-ring {
+  stroke: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* Barra radial: crece desde su base interior y se ilumina en hover */
+.z-viz .bar-rect {
+  fill: var(--bar, var(--accent));   /* matiz por origen*/
+  filter: url(#viz-glow);
+  transform-box: fill-box;
+  transform-origin: 50% 100%;          /* base interior de la barra */
+  transition: transform .18s cubic-bezier(.2, .8, .2, 1), fill .18s, filter .18s, opacity .3s var(--ease);
+  cursor: pointer;
+}
+
+/* Hover: más gruesa, más larga y con glow fuerte + tono aclarado del acento */
+.z-viz .bar:hover .bar-rect,
+.z-viz .bar.hot .bar-rect {
+  transform: scale(2.0, 1.18);
+  fill: color-mix(in srgb, var(--bar, var(--accent)) 55%, #fff);
+  filter: url(#viz-glowStrong);
+}
+
+/* Líneas guía radiales (spokes) y marcas exteriores (ticks) */
+.z-viz .spoke {
+  stroke: color-mix(in srgb, var(--accent) 13%, transparent);
+  stroke-width: 1;
+}
+
+.z-viz .tick {
+  stroke: color-mix(in srgb, var(--accent) 30%, transparent);
+  stroke-width: 1.5;
+}
+
+/* Lector central (HUD): índice y valor de la barra activa */
+.viz-hud-k {
+  fill: var(--gris);
+  font-size: 11px;
+  letter-spacing: .25em;
+  text-anchor: middle;
+}
+
+.viz-hud-v {
+  fill: var(--accent);
+  font-size: 30px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.viz-hud-i {
+  fill: var(--fg);
+  font-size: 11px;
+  letter-spacing: .05em;   /* menos ancho: los nombres largos no rozan las barras */
+  text-anchor: middle;
+}
+
+/* Meta inferior (n, fórmula) */
+.z-viz-foot {
+  width: 100%;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gris-med);
+}
+
+.z-viz-reg {
+  color: var(--accent);
+  opacity: .7;
+}
+
+/* Orígenes: cada matiz de verde con su institución */
+.z-viz-legend {
+  width: 100%;
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+.z-viz-leg {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.z-viz-leg i {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Estado detalle: click en una barra reorganiza la sección -
+   Por defecto el gráfico va centrado (flex center). Al activar .is-detail
+   (JS), el gráfico se corre a la izquierda y aparece el panel a la derecha. */
+.z-viz-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2rem, 5vw, 4rem);
+  width: 100%;
+  position: relative;
+}
+
+/* Cerrado (sin detalle): la sección reserva 9.5rem a la derecha (carril de
+   la barra de progreso) y 3rem a la izquierda, así que el centro del área con
+   padding cae a la izquierda del centro real. 
+   Al abrir el detalle (.is-detail) vuelve a 0 (gráfico a la izq. + panel). */
+.z-viz-layout {
+  transition: transform .6s var(--ease);
+}
+
+.z-viz-layout:not(.is-detail) {
+  transform: translateX(3.25rem);
+}
+
+/* Glow expandido del estado detalle: cubre todo el largo de la sección con
+   una densidad más baja que el halo centrado del gráfico. Oculto hasta que
+   se abre el detalle (.is-detail). */
+.z-viz-layout::before {
+  content: '';
+  position: absolute;
+  inset: -20% -5%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, color-mix(in srgb, var(--accent) 5%, transparent) 0%, transparent 80%);
+  filter: blur(90px);
+  transition: opacity .6s var(--ease);
+}
+
+.z-viz-layout.is-detail::before {
+  opacity: 1;
+}
+
+/* Columna izquierda (gráfico + meta): se achica al abrir el detalle */
+.z-viz-main {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 560px;
+  transition: max-width .6s var(--ease);
+  position: relative;   /* sobre el glow de la sección */
+  z-index: 1;
+}
+
+.z-viz-layout.is-detail {
+  justify-content: flex-start;
+}
+
+.z-viz-layout.is-detail .z-viz-main {
+  max-width: 400px;
+}
+
+/* Al abrir el detalle, el halo centrado del gráfico pierde densidad y deja
+   protagonismo al glow expandido de la sección. */
+.z-viz-layout.is-detail .z-viz-stage::before {
+  opacity: .4;
+}
+
+/* En detalle, las barras no elegidas se atenúan para enfocar la activa */
+.z-viz-layout.is-detail .bar:not(.is-selected) .bar-rect {
+  opacity: .3;
+}
+
+.z-viz-layout.is-detail .bar:hover .bar-rect {
+  opacity: 1;
+}
+
+/* Barra seleccionada: realce persistente (igual que el hover) */
+.z-viz .bar.is-selected .bar-rect {
+  transform: scale(2.0, 1.18);
+  fill: color-mix(in srgb, var(--bar, var(--accent)) 55%, #fff);
+  filter: url(#viz-glowStrong);
+}
+
+/* Panel de datos (centro a margen derecho). Oculto hasta seleccionar. */
+.z-viz-panel {
+  flex: 1 1 0%;
+  min-width: 0;
+  display: none;
+  padding-left: clamp(1rem, 3vw, 2.5rem);
+  border-left: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+  position: relative;   /* sobre el glow de la sección */
+  z-index: 1;
+}
+
+.z-viz-layout.is-detail .z-viz-panel {
+  display: block;
+}
+
+/* Botón cerrar (vuelve al gráfico centrado) */
+.z-viz-d-close {
+  background: none;
+  border: 0.5px solid var(--gris-med);
+  color: var(--gris);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  padding: .4rem .7rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: color .2s, border-color .2s;
+}
+
+.z-viz-d-close:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Eyebrow del registro */
+.z-viz-d-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .75rem;
+}
+
+/* Título del registro */
+.z-viz-d-title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4.5vw, 56px);
+  line-height: .95;
+  font-weight: 400;
+  margin-bottom: .75rem;
+}
+
+/* Valor grande + unidad */
+.z-viz-d-value {
+  font-family: var(--font-display);
+  font-size: 40px;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.z-viz-d-value span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gris);
+  margin-left: .4rem;
+}
+
+/* Categoría */
+.z-viz-d-cat {
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gris);
+  margin-top: .5rem;
+}
+
+/* Separador */
+.z-viz-d-divider {
+  height: 1px;
+  background: var(--gris-dim);
+  margin: 1.5rem 0;
+}
+
+/* Lista de pares clave/valor */
+.z-viz-d-list {
+  display: flex;
+  flex-direction: column;
+  gap: .1rem;
+  margin: 0 0 1.5rem;
+}
+
+.z-viz-d-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: .7rem 0;
+  border-bottom: 0.5px solid var(--gris-dim);
+}
+
+.z-viz-d-item dt {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gris-med);
+}
+
+.z-viz-d-item dd {
+  margin: 0;
+  font-size: 13px;
+  color: var(--fg);
+  text-align: right;
+}
+
+/* Descripción de un campo (Tipo, Área): renglón propio a lo ancho, en mono,
+   debajo del valor. flex-basis 100% la hace saltar de línea dentro del ítem. */
+.z-viz-d-item dd.z-viz-d-fdesc {
+  flex-basis: 100%;
+  margin: 0;
+  text-align: left;
+  max-width: none;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--gris);
+}
+
+/* Entrada escalonada de cada dato. El delay lo pone JS. */
+@keyframes vizFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.viz-anim {
+  animation: vizFadeUp .55s var(--ease) both;
+}
+
+/* ===== Z5 - OBRAS ===== */
+.z5-header {
+  margin-bottom: 2.5rem;
+  padding-top: 1rem;
+}
+
+/* Intro en serif itálica */
+.z5-intro {
+  font-size: 14px;
+  color: var(--gris);
+  line-height: 1.8;
+  max-width: 520px;
+  margin-top: 1.5rem;
+}
+
+/* Grilla responsive de proyectos */
+.z5-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+/* Solo en monitores muy anchos las 4 entran en una fila sin verse angostas. */
+@media (min-width: 1600px) {
+  .z5-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Tarjeta de proyecto (hover elevado) */
+.z5-card {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 1.6rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.08);
+  transition: background 0.3s, transform 0.4s var(--ease);
+}
+
+.z5-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-4px);
+}
+
+.z5c-num {
+  font-family: var(--font-display);
+  font-size: 44px;
+  color: var(--gris-dim);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.z5c-cat {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.z5c-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--fg);
+  margin-bottom: 0.75rem;
+}
+
+.z5c-desc {
+  font-size: 12px;
+  color: var(--gris);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+/* Card seleccionada: se enciende su borde en verde */
+.z5-card.is-active {
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.045);
+  transform: translateY(-4px);
+}
+
+.z5-card.is-active .z5c-num {
+  color: var(--accent);
+}
+
+/* ===== Carrusel de obras =====
+   Aparece bajo la grilla al elegir una card. Ocupa casi todo el ancho, con
+   flechas a los costados. Los slides los inyecta main.js. */
+.z5-carousel {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 2.5rem;
+  animation: z5-car-in 0.4s var(--ease);
+}
+
+.z5-carousel[hidden] {
+  display: none;
+}
+
+@keyframes z5-car-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Flechas laterales (estéticas) */
+.z5-car-arrow {
+  flex-shrink: 0;
+  align-self: center;
+  width: 48px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 0.5px solid var(--gris-med);
+  border-radius: var(--radius);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.z5-car-arrow:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.z5-car-arrow:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.z5-car-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+  box-shadow: none;
+  border-color: var(--gris-dim);
+}
+
+/* Escenario central (ventana + meta) */
+.z5-car-stage {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Ventana: recorta la pista, los slides se trasladan dentro */
+.z5-car-viewport {
+  position: relative;
+  width: 100%;
+  height: clamp(260px, 40vw, 500px);
+  overflow: hidden;
+  border: 0.5px solid var(--gris-dim);
+  background: rgba(255, 255, 255, 0.012);
+}
+
+.z5-car-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.45s var(--ease);
+}
+
+.z5-car-slide {
+  flex: 0 0 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.z5-car-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Slide de video (obra audiovisual): fondo negro y video contenido
+   (sin recortar) se respeta el encuadre del reel. */
+.z5-car-slide--video {
+  background: #000;
+}
+
+.z5-car-slide--video video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Meta bajo la ventana: título de la obra + contador */
+.z5-car-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-top: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gris-med);
+}
+
+.z5-car-title { color: var(--accent); }
+.z5-car-count { color: var(--gris); }
+
+/* ===== CIERRE =====
+   Sección final centrada con palabra fantasma de fondo. */
+.z-cierre {
+  min-height: 58vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 4rem 3rem;
+}
+
+/* Palabra "SISTEMA" gigante en contorno, detrás (con parallax JS) */
+.zc-bg-word {
+  position: absolute !important;
+  z-index: 0 !important;
+  font-family: var(--font-display);
+  font-size: min(28vw, 260px);
+  color: transparent;
+  -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.04);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* Cita de cierre en serif */
+.zc-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(18px, 2.5vw, 28px);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Atribución de la cita. Sin uppercase (a diferencia de .z1-quote-cite):
+   es una referencia bibliográfica larga y en versalitas se vuelve ilegible. */
+.zc-cite {
+  display: block;
+  margin-top: 1.1rem;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--gris);
+}
+
+.zc-cite::before {
+  content: "— ";
+}
+
+.zc-meta {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gris-med);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 2rem 3rem;
+  border-top: 0.5px solid var(--gris-dim);
+  /* Fondo negro sólido: tapa la grilla del body dentro del footer */
+  background: var(--bg);
+}
+
+/* Botón "volver al inicio": caja rígida con acento.
+   Por encima del footer, como bloque propio centrado. */
+.to-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin: 3rem auto;
+  border: 0.5px solid var(--gris-med);
+  border-radius: var(--radius);
+  color: var(--accent);
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease),
+    box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.to-top:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--accent) 22%, transparent);
+  transform: translateY(-3px);
+}
+
+.to-top:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Símbolo ^ dibujado con dos bordes (nítido a cualquier tamaño) */
+.to-top-caret {
+  display: block;
+  width: 11px;
+  height: 11px;
+  border-top: 2px solid currentColor;
+  border-left: 2px solid currentColor;
+  transform: rotate(45deg);
+  position: relative;
+  top: 3px;   /* baja el vértice para centrarlo ópticamente */
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.06em;
+}
+
+.footer-meta {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--gris-med);
+  text-transform: uppercase;
+}
+
+.footer-coords {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--gris);
+}
+
+/* ============================================================
+   RESPONSIVE
+   Ajustes por ancho de pantalla (de mayor a menor).
+   ============================================================ */
+
+/* Reserva el carril del indicador de progreso (línea + etiquetas, que llegan
+   hasta ~6.8rem del borde derecho). */
+.zone:not(.z-cierre) {
+  padding-right: 9.5rem;
+}
+
+/* ============================================================
+   MOVIMIENTO REDUCIDO
+   Si el sistema operativo pide menos animación:
+   sin loops, sin cascadas, sin smooth scroll.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   ESFERA DE NAVEGACIÓN - capa anidada en el hero (zona 1)
+   Añadido sobre el sistema existente, usa sus mismas variables.
+   El canvas Three.js lo inyecta esfera.js dentro de #z1-orb.
+   ============================================================ */
+
+/* Contexto de posicionamiento para la esfera absoluta */
+.z1-hero {
+  position: relative;
+}
+
+/* Caja de la esfera, anclada a la derecha del hero */
+.z1-orb {
+  position: absolute;
+  z-index: 2;                 
+  top: 50%;
+  right: 16%;                   
+  transform: translateY(-50%);
+  width: min(44vw, 560px);
+  height: min(44vw, 560px);
+  max-width: 52%;
+  pointer-events: auto;
+}
+
+/* El canvas WebGL */
+.z1-orb canvas {
+  display: block;
+  touch-action: pan-y;        /* el swipe vertical sigue scrolleando la página */
+}
+
+/* Etiquetas de los nodos de navegación (texto HTML proyectado sobre el canvas) */
+.z1-orb .orb-label {
+  position: absolute;
+  top: 0; left: 0;
+  transform: translate(-50%, -50%);
+  padding: .3em .2em;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--fg);
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto;       /* la etiqueta también captura el click */
+  opacity: 0;
+  transition: opacity .25s var(--ease), color .2s var(--ease), text-shadow .2s var(--ease);
+  text-shadow: 0 0 12px rgba(0,0,0,.9);
+}
+
+/* Etiqueta resaltada al pasar el puntero por su nodo */
+.z1-orb .orb-label.is-hover {
+  color: var(--accent);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--accent) 80%, transparent);
+}

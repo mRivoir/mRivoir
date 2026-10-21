@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MC Panel · Martín Rivoir</title>
+<meta name="description" content="An app to run a group of friends' Minecraft server from your phone.">
+<meta name="theme-color" content="#f3f1ec">
+<meta property="og:title" content="MC Panel · Martín Rivoir">
+<meta property="og:description" content="An app to run a group of friends' Minecraft server from your phone.">
+<meta property="og:type" content="website">
+<link rel="alternate" hreflang="es" href="../es/mc-panel/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../fuentes/geist.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../estilos.css">
+<script>document.documentElement.classList.add('js')</script>
+<script src="../main.js" defer></script>
+</head>
+<body>
+<a class="saltar" href="#contenido">Skip to content</a>
+<header class="cabecera g">
+  <a class="marca" href="../">Martín Rivoir</a>
+  <p class="oficio mono gris">Graphic design · Carmelo, Uruguay</p>
+  <nav class="mono" aria-label="Main">
+    <a href="../#perfil">Profile</a>
+    <a href="#contacto">Contact</a>
+    <a href="../es/mc-panel/" hreflang="es" lang="es">ES</a>
+  </nav>
+</header>
+<main id="contenido">
+<article class="caso" style="--acento: #2E7D4F">
+  <header class="caso-cabeza g">
+    <p class="mono gris">07 / 07</p>
+    <h1>MC Panel</h1>
+    <p class="bajada">An app to run a group of friends' Minecraft server from your phone.</p>
+    <dl class="ficha mono">
+      <dt>Year</dt><dd>2026</dd>
+      <dt>Context</dt><dd>Personal project</dd>
+      <dt>Role</dt><dd>Product design and development</dd>
+    </dl>
+    
+  </header>
+  <figure class="caso-hero g"><div class="ghast-solo" style="--c: 1 / -1; view-transition-name: obra-mc-panel"><span class="ghast-flota"><img src="../img/mcpanel/ghast-960.webp" srcset="../img/mcpanel/ghast-960.webp 960w, ../img/mcpanel/ghast-1920.webp 1024w" sizes="(max-width: 760px) 100vw, 37vw" width="960" height="960" alt="The happy ghast, MC Panel logo" fetchpriority="high" decoding="async"></span><span class="ghast-sombra"></span></div></figure>
+  <div class="intro-caso g">
+    <p class="aparece">Our group's Minecraft server runs on my PC, and to play you had to message me to turn it on. MC Panel solves that: it shows whether the server is online and who is connected, lets players request a start with one button, notifies my phone to approve it, and adds chat, events and a remote console.</p>
+    
+  </div>
+  <div class="bloque g fila"><figure class="aparece" style="--c: 1 / 7"><img src="../img/mcpanel/login-960.webp" srcset="../img/mcpanel/login-960.webp 960w, ../img/mcpanel/login-1920.webp 1170w" sizes="(max-width: 760px) 100vw, 29vw" width="960" height="2078" alt="MC Panel sign-in screen" loading="lazy" decoding="async"></figure><figure class="aparece" style="--c: 7 / 13"><img src="../img/mcpanel/panel-960.webp" srcset="../img/mcpanel/panel-960.webp 960w, ../img/mcpanel/panel-1920.webp 1170w" sizes="(max-width: 760px) 100vw, 29vw" width="960" height="2078" alt="Status screen: server online, three players connected" loading="lazy" decoding="async"></figure><figure class="aparece" style="--c: 13 / 19"><img src="../img/mcpanel/chat-960.webp" srcset="../img/mcpanel/chat-960.webp 960w, ../img/mcpanel/chat-1920.webp 1170w" sizes="(max-width: 760px) 100vw, 29vw" width="960" height="2078" alt="Chat screen with the next event on top" loading="lazy" decoding="async"></figure><figure class="aparece" style="--c: 19 / 25"><img src="../img/mcpanel/admin-960.webp" srcset="../img/mcpanel/admin-960.webp 960w, ../img/mcpanel/admin-1920.webp 1170w" sizes="(max-width: 760px) 100vw, 29vw" width="960" height="2078" alt="Admin panel with nine sections" loading="lazy" decoding="async"></figure></div>
+  <div class="bloque g fila"><div class="texto aparece" style="--c: 1 / 12"><p class="rotulo mono gris">The design</p><p>One main action per screen: the switch in the middle. The in-between states (starting, stopping) live on the server, so every device sees the same thing, no matter where the command came from. The admin panel is an index of nine sections with descriptions, instead of a row of tabs you had to swipe sideways.</p></div><div class="texto aparece" style="--c: 13 / 25"><p class="rotulo mono gris">How it's built</p><p>React Native with Expo, a single codebase for iOS, Android and web, and a Node.js API running on the PC. Status comes from the same protocol the game's server list uses, with no plugins or mods. Shutdown goes through RCON so the world saves cleanly, and the scripts that can run are whitelisted.</p></div></div>
+  <div class="bloque g"><figure class="diagrama aparece" style="--c: 1 / 25"><svg viewBox="0 0 1000 330" role="img" aria-label="Architecture: the app talks to an API on the PC, which queries the Minecraft server and notifies through Discord and push">
+  <rect class="caja" x="1" y="110" width="220" height="110" rx="14"/>
+  <text x="24" y="146">PHONE · WEB</text><text class="t-chico" x="24" y="172">React Native + Expo</text><text class="t-chico" x="24" y="192">iOS · Android · web</text>
+  <rect class="caja" x="390" y="90" width="230" height="150" rx="14"/>
+  <text x="414" y="126">THE PC</text><text class="t-chico" x="414" y="152">API Node.js · Express</text><text class="t-chico" x="414" y="172">users, chat, events</text><text class="t-chico" x="414" y="192">whitelisted scripts</text>
+  <rect class="caja" x="780" y="20" width="218" height="90" rx="14"/>
+  <text x="802" y="56">MINECRAFT</text><text class="t-chico" x="802" y="82">protocol ping · RCON</text>
+  <rect class="caja" x="780" y="220" width="218" height="90" rx="14"/>
+  <text x="802" y="256">DISCORD</text><text class="t-chico" x="802" y="282">presence and notices</text>
+  <path class="flujo vivo" d="M221 150 H390"/><path class="flujo vivo" d="M390 190 H221" style="animation-direction: reverse"/>
+  <text class="t-chico" x="250" y="140">HTTPS · JSON</text><text class="t-chico" x="262" y="212">push</text>
+  <path class="flujo vivo" d="M620 130 C700 130 700 65 780 65"/>
+  <path class="flujo vivo" d="M620 200 C700 200 700 265 780 265"/>
+</svg></figure></div>
+  <nav class="siguiente g" aria-label="Next">
+    <p class="rotulo mono gris">Next</p>
+    <a class="proximo" href="../mosaico/"><span>Mosaico Uruguay</span></a>
+    <a class="mini" href="../mosaico/" tabindex="-1" aria-hidden="true"><img src="../img/mosaico/danza-960.webp" srcset="../img/mosaico/danza-960.webp 960w, ../img/mosaico/danza-1920.webp 1920w" sizes="(max-width: 760px) 100vw, 33vw" width="960" height="1440" alt="Dance poster: a dancer inside the blue arch, over waves" loading="lazy" decoding="async"></a>
+    <a class="todos mono subrayable" href="../">← All work</a>
+  </nav>
+</article>
+</main>
+<footer class="pie-sitio g" id="contacto">
+  <p class="rotulo mono gris">Contact</p>
+  <a class="correo subrayable" href="mailto:martin.rivoir4@gmail.com">martin.rivoir4@gmail.com</a>
+  <p class="enlaces mono">
+    <a class="subrayable" href="https://www.linkedin.com/in/martinrivoir-3493ab264" rel="me">LinkedIn</a>
+    <a class="subrayable" href="../pdf/martin-rivoir-portfolio-en.pdf">Portfolio as PDF</a>
+    
+  </p>
+  <p class="hecho mono gris">Press G to see the grid.<br>© 2026 Martín Rivoir</p>
+</footer>
+<div class="grilla g" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+<button class="ver-grilla mono" type="button" aria-pressed="false">Grid <kbd>G</kbd></button>
+</body>
+</html>

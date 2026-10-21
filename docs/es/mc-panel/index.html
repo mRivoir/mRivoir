@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MC Panel · Martín Rivoir</title>
+<meta name="description" content="Una app para manejar desde el celular el servidor de Minecraft de un grupo de amigos.">
+<meta name="theme-color" content="#f3f1ec">
+<meta property="og:title" content="MC Panel · Martín Rivoir">
+<meta property="og:description" content="Una app para manejar desde el celular el servidor de Minecraft de un grupo de amigos.">
+<meta property="og:type" content="website">
+<link rel="alternate" hreflang="en" href="../../mc-panel/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../../fuentes/geist.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../estilos.css">
+<script>document.documentElement.classList.add('js')</script>
+<script src="../../main.js" defer></script>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera g">
+  <a class="marca" href="../../es/">Martín Rivoir</a>
+  <p class="oficio mono gris">Diseño gráfico · Carmelo, Uruguay</p>
+  <nav class="mono" aria-label="Principal">
+    <a href="../../es/#perfil">Perfil</a>
+    <a href="#contacto">Contacto</a>
+    <a href="../../mc-panel/" hreflang="en" lang="en">EN</a>
+  </nav>
+</header>
+<main id="contenido">
+<article class="caso" style="--acento: #2E7D4F">
+  <header class="caso-cabeza g">
+    <p class="mono gris">07 / 07</p>
+    <h1>MC Panel</h1>
+    <p class="bajada">Una app para manejar desde el celular el servidor de Minecraft de un grupo de amigos.</p>
+    <dl class="ficha mono">
+      <dt>Año</dt><dd>2026</dd>
+      <dt>Contexto</dt><dd>Proyecto personal</dd>
+      <dt>Rol</dt><dd>Diseño de producto y desarrollo</dd>
+    </dl>
+    
+  </header>
+  <figure class="caso-hero g"><div class="ghast-solo" style="--c: 1 / -1; view-transition-name: obra-mc-panel"><span class="ghast-flota"><img src="../../img/mcpanel/ghast-960.webp" srcset="../../img/mcpanel/ghast-960.webp 960w, ../../img/mcpanel/ghast-1920.webp 1024w" sizes="(max-width: 760px) 100vw, 37vw" width="960" height="960" alt="El happy ghast, logo de MC Panel" fetchpriority="high" decoding="async"></span><span class="ghast-sombra"></span></div></figure>
+  <div class="intro-caso g">
+    <p class="aparece">El servidor de Minecraft del grupo corre en mi PC, y para jugar había que escribirme para que lo prendiera. MC Panel resuelve eso: muestra si el servidor está online y quién está conectado, deja pedir el encendido con un botón, me avisa al celular para aprobarlo y suma chat, eventos y una consola remota.</p>
+    
+  </div>
+  <div class="bloque g fila"><figure class="aparece" style="--c: 1 / 7"><img src="../../img/mcpanel/login-960.webp" srcset="../../img/mcpanel/login-960.webp 960w, ../../img/mcpanel/login-1920.webp 1170w" sizes="(max-width: 760px) 100vw, 29vw" width="960" height="2078" alt="Pantalla de ingreso de MC Panel" loading="lazy" decoding="async"></figure><figure class="aparece" style="--c: 7 / 13"><img src="../../img/mcpanel/panel-960.webp" srcset="../../img/mcpanel/panel-960.webp 960w, ../../img/mcpanel/panel-1920.webp 1170w" sizes="(max-width: 760px) 100vw, 29vw" width="960" height="2078" alt="Pantalla de estado: servidor online, tres jugadores conectados" loading="lazy" decoding="async"></figure><figure class="aparece" style="--c: 13 / 19"><img src="../../img/mcpanel/chat-960.webp" srcset="../../img/mcpanel/chat-960.webp 960w, ../../img/mcpanel/chat-1920.webp 1170w" sizes="(max-width: 760px) 100vw, 29vw" width="960" height="2078" alt="Pantalla de chat con el próximo evento arriba" loading="lazy" decoding="async"></figure><figure class="aparece" style="--c: 19 / 25"><img src="../../img/mcpanel/admin-960.webp" srcset="../../img/mcpanel/admin-960.webp 960w, ../../img/mcpanel/admin-1920.webp 1170w" sizes="(max-width: 760px) 100vw, 29vw" width="960" height="2078" alt="Panel de administración con nueve secciones" loading="lazy" decoding="async"></figure></div>
+  <div class="bloque g fila"><div class="texto aparece" style="--c: 1 / 12"><p class="rotulo mono gris">El diseño</p><p>Una sola acción principal por pantalla: el interruptor al centro. Los estados intermedios (encendiendo, apagando) los lleva el servidor, así todos los dispositivos ven lo mismo, sin importar desde dónde se dio la orden. El panel de administración es un índice de nueve secciones con su descripción, en vez de una fila de pestañas que había que arrastrar de costado.</p></div><div class="texto aparece" style="--c: 13 / 25"><p class="rotulo mono gris">Cómo está hecho</p><p>React Native con Expo, una sola base para iOS, Android y web, y una API en Node.js que corre en la PC. El estado sale del mismo protocolo que usa la lista de servidores del juego, sin plugins ni mods. El apagado va por RCON para que el mundo se guarde en orden, y los scripts que se pueden ejecutar están en una lista blanca.</p></div></div>
+  <div class="bloque g"><figure class="diagrama aparece" style="--c: 1 / 25"><svg viewBox="0 0 1000 330" role="img" aria-label="Arquitectura: la app habla con una API en la PC, que consulta al servidor de Minecraft y avisa por Discord y notificaciones">
+  <rect class="caja" x="1" y="110" width="220" height="110" rx="14"/>
+  <text x="24" y="146">CELULAR · WEB</text><text class="t-chico" x="24" y="172">React Native + Expo</text><text class="t-chico" x="24" y="192">iOS · Android · web</text>
+  <rect class="caja" x="390" y="90" width="230" height="150" rx="14"/>
+  <text x="414" y="126">TU PC</text><text class="t-chico" x="414" y="152">API Node.js · Express</text><text class="t-chico" x="414" y="172">usuarios, chat, eventos</text><text class="t-chico" x="414" y="192">scripts en lista blanca</text>
+  <rect class="caja" x="780" y="20" width="218" height="90" rx="14"/>
+  <text x="802" y="56">MINECRAFT</text><text class="t-chico" x="802" y="82">ping del protocolo · RCON</text>
+  <rect class="caja" x="780" y="220" width="218" height="90" rx="14"/>
+  <text x="802" y="256">DISCORD</text><text class="t-chico" x="802" y="282">quién está y avisos</text>
+  <path class="flujo vivo" d="M221 150 H390"/><path class="flujo vivo" d="M390 190 H221" style="animation-direction: reverse"/>
+  <text class="t-chico" x="250" y="140">HTTPS · JSON</text><text class="t-chico" x="262" y="212">push</text>
+  <path class="flujo vivo" d="M620 130 C700 130 700 65 780 65"/>
+  <path class="flujo vivo" d="M620 200 C700 200 700 265 780 265"/>
+</svg></figure></div>
+  <nav class="siguiente g" aria-label="Siguiente">
+    <p class="rotulo mono gris">Siguiente</p>
+    <a class="proximo" href="../../es/mosaico/"><span>Mosaico Uruguay</span></a>
+    <a class="mini" href="../../es/mosaico/" tabindex="-1" aria-hidden="true"><img src="../../img/mosaico/danza-960.webp" srcset="../../img/mosaico/danza-960.webp 960w, ../../img/mosaico/danza-1920.webp 1920w" sizes="(max-width: 760px) 100vw, 33vw" width="960" height="1440" alt="Afiche de danza: una bailarina dentro del arco azul, sobre ondas" loading="lazy" decoding="async"></a>
+    <a class="todos mono subrayable" href="../../es/">← Todos los trabajos</a>
+  </nav>
+</article>
+</main>
+<footer class="pie-sitio g" id="contacto">
+  <p class="rotulo mono gris">Contacto</p>
+  <a class="correo subrayable" href="mailto:martin.rivoir4@gmail.com">martin.rivoir4@gmail.com</a>
+  <p class="enlaces mono">
+    <a class="subrayable" href="https://www.linkedin.com/in/martinrivoir-3493ab264" rel="me">LinkedIn</a>
+    <a class="subrayable" href="../../pdf/martin-rivoir-portfolio-es.pdf">Portfolio en PDF</a>
+    
+  </p>
+  <p class="hecho mono gris">Tocá G para ver la grilla.<br>© 2026 Martín Rivoir</p>
+</footer>
+<div class="grilla g" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+<button class="ver-grilla mono" type="button" aria-pressed="false">Grilla <kbd>G</kbd></button>
+</body>
+</html>

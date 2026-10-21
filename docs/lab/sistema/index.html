@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="SISTEMA — Manifiesto infográfico personal. La transición de código a diseño contada con scroll.">
+  <meta name="theme-color" content="#060807">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>SISTEMA — Manifiesto Personal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=DM+Serif+Display:ital,wght@0,400;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+  <noscript>
+    <style>
+      /* Sin JS la página debe verse igual */
+      .loader {
+        display: none;
+      }
+    </style>
+  </noscript>
+</head>
+
+<body>
+
+  <!-- LOADER -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-bar"></div>
+    <div class="loader-label">COMPILANDO SISTEMA<span class="blink">_</span></div>
+  </div>
+
+  <!-- BARRA DE PROGRESO LATERAL -->
+  <div class="progress-track" aria-hidden="true">
+    <div class="progress-fill" id="progress-fill"></div>
+    <div class="progress-labels">
+      <span data-pct="0">SISTEMA</span>
+      <span data-pct="18">ORIGEN</span>
+      <span data-pct="38">HERRAMIENTAS</span>
+      <span data-pct="56">DISCIPLINAS</span>
+      <span data-pct="80">OBRAS</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">SIS<em>TE</em>MA</a>
+    <div class="nav-links">
+      <a href="#origen">Origen</a>
+      <a href="#visual">Herramientas</a>
+      <a href="#disciplinas">Disciplinas</a>
+      <a href="#obras">Obras</a>
+    </div>
+    <div class="nav-state" id="nav-state">// manifiesto</div>
+  </nav>
+
+  <main>
+
+    <!-- ============================================================
+         SISTEMA
+    ============================================================ -->
+    <section class="zone z1" id="sistema">
+      <div class="z1-grid-overlay" aria-hidden="true"></div>
+
+      <header class="z1-hero">
+        <div class="z1-eyebrow">
+          <span class="eyebrow-line" aria-hidden="true"></span>
+          <span id="eyebrow-text">Manifiesto infográfico personal · LDG 3º · 2026</span>
+        </div>
+
+        <h1 class="z1-title">
+          <span class="z1-tl">SIS<em>TE</em></span>
+          <span class="z1-tl">M<span class="z1-swap" id="z1-swap" aria-hidden="true"><span
+                class="z1-swap-g">A</span></span></span>
+        </h1>
+
+        <div class="z1-meta">
+          <span class="z1-coords">ln 34 · v2.0.26</span>
+          <span class="z1-sep" aria-hidden="true">|</span>
+          <span class="z1-tag">Programador & Diseñador</span>
+        </div>
+
+        <blockquote class="z1-quote">
+          "No puedes conectar los puntos mirando hacia adelante; solo puedes conectarlos mirando hacia atrás."
+          <cite class="z1-quote-cite">Steve Jobs</cite>
+        </blockquote>
+
+        <!-- Esfera de navegación -->
+        <div class="z1-orb" id="z1-orb" aria-hidden="true"></div>
+      </header>
+
+      <!-- Manifiesto -->
+      <article class="z1-manifesto">
+        <div class="zm-col">
+          <div class="zm-tag morph-tag">// manifiesto</div>
+          <div class="zm-num" aria-hidden="true">01</div>
+        </div>
+        <div class="zm-body">
+          <h2 class="zm-title morph-title morph-intense">El diseño como <span class="tm-accent">propósito</span></h2>
+          <p class="zm-para zm-lead">
+            No llegué al diseño en línea recta. Pasé por la ingeniería, por el código, por un par de
+            trabajos que no terminaban de tener sentido. Por un tiempo pensé que eso era el problema.
+            Después me di cuenta de que era el material.
+          </p>
+          <p class="zm-para">
+            Para mí, el diseño es eso: tomar algo complejo y encontrarle la forma que lo hace legible.
+            Sin adornos. Lo que no sirve, sobra.
+          </p>
+          <p class="zm-para">
+            No soy diseñador que aprendió a programar, ni programador que aprendió a diseñar. Soy las dos
+            cosas al mismo tiempo, y eso cambia lo que puedo hacer. Entiendo la lógica del sistema que
+            construyo y el ojo con el que lo voy a mirar cuando termine. No son dos mundos distintos. Son
+            dos lenguajes para decir lo mismo.
+          </p>
+          <p class="zm-para">
+            Diseñar con honestidad significa no embellecer lo que engaña, no simplificar lo que merece
+            complejidad y no olvidar a quien va a usar lo que hago. Cada decisión visual es también una
+            decisión sobre quién puede acceder, quién se siente incluido, quién queda afuera. Eso pesa,
+            y tiene que pesar.
+          </p>
+          <p class="zm-para zm-highlight">
+            No hace falta elegir entre lo que sos. Hace falta encontrarle la forma.
+          </p>
+        </div>
+        <aside class="z1-why">
+          <button type="button" class="why-label" aria-expanded="false" aria-controls="why-text">// por qué
+            SISTEMA</button>
+          <p class="why-text" id="why-text">
+            Un sistema es un conjunto de partes que funcionan juntas para producir algo que ninguna
+            parte podría producir sola. Eso describe exactamente lo que soy: la suma de la lógica,
+            el diseño, el territorio, el deporte y la ciencia. Ninguna de esas partes por separado
+            produce lo que todas juntas generan.
+          </p>
+        </aside>
+      </article>
+    </section>
+
+    <!-- ============================================================
+         ORIGEN
+    ============================================================ -->
+    <section class="zone z2" id="origen">
+      <header class="z2-header">
+        <div class="z2-tag morph-tag">// origen</div>
+        <div class="sec-title-row">
+          <span class="sec-num" aria-hidden="true">02</span>
+          <h2 class="z2-title morph-title">Territorio<br><em>+ tiempo</em></h2>
+        </div>
+        <p class="z2-intro">
+          Un recorrido que no fue lineal. Los lugares que me formaron
+          y las experiencias que fueron dejando material.
+        </p>
+      </header>
+
+      <!-- Dos columnas: línea de tiempo (izq) + recorridos (der) -->
+      <div class="z2-origen-grid">
+
+        <!-- Timeline vertical -->
+        <div class="z2-timeline">
+          <div class="zt-line" aria-hidden="true"></div>
+
+          <article class="zt-item">
+            <div class="zt-year">1997</div>
+            <div class="zt-dot" aria-hidden="true"></div>
+            <div class="zt-body">
+              <h3 class="zt-title morph-label">Nacimiento · Montevideo</h3>
+              <p class="zt-desc">Primera computadora. El interés por la tecnología empieza antes de poder nombrarlo.</p>
+              <div class="zt-chips"><span>MVD</span><span>Origen</span></div>
+            </div>
+          </article>
+
+          <article class="zt-item">
+            <div class="zt-year">2002</div>
+            <div class="zt-dot" aria-hidden="true"></div>
+            <div class="zt-body">
+              <h3 class="zt-title morph-label">Primera mudanza · Carmelo</h3>
+              <p class="zt-desc">El mundo se achica y se vuelve más humano. Interior, deporte, comunidad.</p>
+              <div class="zt-chips"><span>CRM</span><span>Mudanza</span></div>
+            </div>
+          </article>
+
+          <article class="zt-item">
+            <div class="zt-year">2002<br>→<br>2014</div>
+            <div class="zt-dot zt-dot-accent" aria-hidden="true"></div>
+            <div class="zt-body">
+              <h3 class="zt-title morph-label">Deportes · Carmelo</h3>
+              <p class="zt-desc">Fútbol, basketball, natación, atletismo. El deporte como disciplina, equipo y
+                rendimiento.</p>
+              <div class="zt-chips">
+                <span><img class="sport-ico" src="iconos/futbol.svg" alt="" aria-hidden="true" />Fútbol</span>
+                <span><img class="sport-ico" src="iconos/basketball.svg" alt="" aria-hidden="true" />Basketball</span>
+                <span><img class="sport-ico" src="iconos/natacion.svg" alt="" aria-hidden="true" />Natación</span>
+                <span><img class="sport-ico" src="iconos/atletismo.svg" alt="" aria-hidden="true" />Atletismo</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="zt-item">
+            <div class="zt-year">2014</div>
+            <div class="zt-dot" aria-hidden="true"></div>
+            <div class="zt-body">
+              <h3 class="zt-title morph-label">Liceo Nº2 · Físico-Matemático</h3>
+              <p class="zt-desc">La ciencia como modo de ver el mundo. La lógica empieza a tomar forma académica.</p>
+              <div class="zt-chips"><span>Educación</span><span>Ciencia</span></div>
+            </div>
+          </article>
+
+          <article class="zt-item">
+            <div class="zt-year">2016</div>
+            <div class="zt-dot" aria-hidden="true"></div>
+            <div class="zt-body">
+              <h3 class="zt-title morph-label">Colonia · ORT + UDE</h3>
+              <p class="zt-desc">El territorio donde el sistema toma su forma final. Programación y diseño.</p>
+              <div class="zt-chips"><span>COL</span><span>Presente</span></div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Columna derecha: bloques interactivos + mapa de
+             recorridos, alineados con la línea de tiempo. -->
+        <div class="z2-side">
+
+        <!-- Mapa de recorridos: línea verde animada Carmelo–Colonia–Montevideo. -->
+        <div class="z2-geomap">
+            <div class="z2-geomap-stage" id="z2-geomap-stage">
+              <svg viewBox="0 -2 100 56" role="img" aria-label="Recorrido terrenal Carmelo–Colonia–Montevideo">
+                <defs>
+                  <radialGradient id="geo-halo-grad">
+                    <stop offset="0%" stop-opacity="0.2" />
+                    <stop offset="100%" stop-opacity="0" />
+                  </radialGradient>
+                  <filter id="geo-glow" x="-60%" y="-60%" width="220%" height="220%">
+                    <feGaussianBlur stdDeviation="1.2" result="b" />
+                    <feMerge>
+                      <feMergeNode in="b" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                  <filter id="geo-glow-strong" x="-80%" y="-80%" width="260%" height="260%">
+                    <feGaussianBlur stdDeviation="2.5" result="b" />
+                    <feMerge>
+                      <feMergeNode in="b" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                <!-- trazo fino gris Carmelo - Colonia - Montevideo - con  nodos intermedios -->
+                <polyline class="geo-route" points="6,6 18,13 23,29 57,23 93,42" />
+
+                <!-- Línea verde animada: main.js le asigna la 'd' del tramo activo
+                   y recorre los nodos. -->
+                <path class="geo-trail" id="geo-trail" filter="url(#geo-glow-strong)" />
+
+                <!-- Nodos secundarios: apagados por defecto, main.js
+                   les pone .is-lit cuando la linea pasa sobre ellos. -->
+                <rect class="geo-sec" id="geo-sec-1" x="17.2" y="12.2" width="1.6" height="1.6" />
+                <rect class="geo-sec" id="geo-sec-2" x="56.2" y="22.2" width="1.6" height="1.6" />
+
+                <!-- Nodos principales -->
+                <g class="geo-node">
+                  <circle class="geo-halo" cx="6" cy="6" r="5.23" />
+                  <circle class="geo-dot" cx="6" cy="6" r="1.14" filter="url(#geo-glow)" />
+                  <text class="geo-label" x="6" y="-0.5">CARMELO</text>
+                </g>
+                <g class="geo-node">
+                  <circle class="geo-halo" cx="23" cy="29" r="5.23" />
+                  <circle class="geo-dot" cx="23" cy="29" r="1.14" filter="url(#geo-glow)" />
+                  <text class="geo-label" x="19" y="39" text-anchor="middle">COLONIA</text>
+                </g>
+                <g class="geo-node">
+                  <circle class="geo-halo" cx="93" cy="42" r="5.23" />
+                  <circle class="geo-dot" cx="93" cy="42" r="1.14" filter="url(#geo-glow)" />
+                  <text class="geo-label" x="93" y="51" text-anchor="end">MONTEVIDEO</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+        <!-- /mapa -->
+
+        <!-- Bloques clickeables, cada uno ilumina su período y
+             dispara la línea verde del mapa (ver main.js - recorrido territorial). -->
+        <div class="z2-route" role="group" aria-label="Lugares del recorrido — clic para animar el mapa">
+          <button type="button" class="z2-rblock" data-route="1">
+            <span class="rb-code">MVD</span>
+            <span class="rb-name">Montevideo</span>
+            <span class="rb-period">1997 — 2002</span>
+          </button>
+          <button type="button" class="z2-rblock" data-route="2">
+            <span class="rb-code">CRM</span>
+            <span class="rb-name">Carmelo</span>
+            <span class="rb-period">2002 — 2014</span>
+          </button>
+          <button type="button" class="z2-rblock" data-route="3">
+            <span class="rb-code">MVD</span>
+            <span class="rb-name">Montevideo</span>
+            <span class="rb-period">2014 — 2016</span>
+          </button>
+          <button type="button" class="z2-rblock" data-route="4">
+            <span class="rb-code">COL</span>
+            <span class="rb-name">Colonia</span>
+            <span class="rb-period">2016 — act.</span>
+          </button>
+        </div>
+        </div><!-- /z2-side -->
+      </div>
+    </section>
+
+    <!-- ============================================================
+        HERRAMIENTAS — histograma radial
+         La geometría la construye main.js
+    ============================================================ -->
+    <section class="zone z-viz" id="visual">
+      <header class="z-viz-header">
+        <div class="z-viz-tag morph-tag">// herramientas</div>
+        <div class="sec-title-row">
+          <span class="sec-num" aria-hidden="true">03</span>
+          <h2 class="z-viz-title morph-title">Las herramientas<br><em>como forma</em></h2>
+        </div>
+        <p class="z-viz-intro">
+          Todo lo que aprendí a usar a lo largo del camino. Del software de programación
+          al de diseño. Pasá el puntero sobre cada barra para leer la herramienta.
+        </p>
+      </header>
+
+      <!-- Por defecto el gráfico va centrado, al hacer click en una
+           barra, JS agrega .is-detail y aparece el panel de datos a la derecha. -->
+      <div class="z-viz-layout" id="viz-layout">
+        <div class="z-viz-main">
+          <div class="z-viz-stage">
+            <svg id="viz-chart" viewBox="0 0 620 620" role="img" aria-label="Histograma radial de herramientas">
+              <defs>
+                <filter id="viz-glow" x="-60%" y="-60%" width="220%" height="220%">
+                  <feGaussianBlur stdDeviation="2.4" result="b" />
+                  <feMerge>
+                    <feMergeNode in="b" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+                <filter id="viz-glowStrong" x="-80%" y="-80%" width="260%" height="260%">
+                  <feGaussianBlur stdDeviation="5" result="b" />
+                  <feMerge>
+                    <feMergeNode in="b" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <g id="viz-dial" transform="translate(310,310)">
+                <circle class="viz-ring" r="248" fill="none" stroke-dasharray="2 6" />
+                <g id="viz-spokes"></g>
+                <g id="viz-ticks"></g>
+                <g id="viz-bars"></g>
+                <g id="viz-hud">
+                  <text class="viz-hud-k" y="-14">TOOL / LEVEL</text>
+                  <text class="viz-hud-i" id="viz-hudI" y="6">—</text>
+                  <text class="viz-hud-v" id="viz-hudV" y="40">··</text>
+                </g>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Matices de verde, la rellena main.js -->
+          <div class="z-viz-legend" id="viz-legend" aria-hidden="true"></div>
+
+          <div class="z-viz-foot">
+            <span class="z-viz-reg">+ TOOLKIT</span>
+            <span>tools.length = <span id="viz-nbars"></span></span>
+            <span>status: ready</span>
+          </div>
+        </div>
+
+        <!-- Panel de datos, JS lo rellena al seleccionar una barra -->
+        <aside class="z-viz-panel" id="viz-panel" aria-live="polite"></aside>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DISCIPLINAS
+    ============================================================ -->
+    <section class="zone z3" id="disciplinas">
+      <header class="z3-header">
+        <div class="z3-tag morph-tag">// disciplinas</div>
+        <div class="sec-title-row">
+          <span class="sec-num" aria-hidden="true">04</span>
+          <h2 class="z3-title morph-title">Dos lenguajes,<br><em>una sola voz</em></h2>
+        </div>
+        <p class="z3-intro">
+          Es una historia de dos lenguajes
+          que conviven y se alimentan mutuamente.
+        </p>
+      </header>
+
+      <!-- Dos disciplinas como carpetas de un sistema, click en el header para
+           desplegar el árbol en cadena (ver main.js - disciplinas) -->
+      <div class="z3-tree">
+        <!-- Código -->
+        <article class="disc disc-code">
+          <button type="button" class="disc-head" aria-expanded="false">
+            <span class="disc-caret" aria-hidden="true"></span>
+            <span class="disc-headmain">
+              <span class="disc-meta"><span class="disc-path">~/codigo</span><span class="disc-lang">Lenguaje A ·
+                  01</span></span>
+              <span class="disc-name">Código</span>
+            </span>
+          </button>
+          <div class="disc-body">
+            <div class="disc-body-inner">
+              <p class="disc-desc">// la lógica como modo de pensar el mundo.</p>
+              <div class="disc-list">
+
+                <div class="disc-node" style="--i:0">
+                  <button type="button" class="disc-row disc-parent" aria-expanded="false">
+                    <span class="disc-branch">├─</span><span class="disc-caret2" aria-hidden="true"></span><span
+                      class="disc-year">2016</span><span class="disc-text">Ingeniería en Sistemas · UDELAR</span>
+                  </button>
+                  <div class="disc-children">
+                    <div class="disc-children-inner">
+                      <div class="disc-row disc-child" style="--i:0"><span class="disc-branch disc-err">└─</span><span
+                          class="disc-text disc-err">Error: no se puede encontrar el archivo especificado</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="disc-node" style="--i:1">
+                  <button type="button" class="disc-row disc-parent" aria-expanded="false">
+                    <span class="disc-branch">├─</span><span class="disc-caret2" aria-hidden="true"></span><span
+                      class="disc-year">2020</span><span class="disc-text">Analista Programador · ORT</span>
+                  </button>
+                  <div class="disc-children">
+                    <div class="disc-children-inner">
+                      <div class="disc-node" style="--i:0">
+                        <button type="button" class="disc-row disc-parent" aria-expanded="false">
+                          <span class="disc-branch">├─</span><span class="disc-caret2" aria-hidden="true"></span><span
+                            class="disc-text">Autores</span>
+                        </button>
+                        <div class="disc-children">
+                          <div class="disc-children-inner">
+                            <div class="disc-row disc-child" style="--i:0"><span class="disc-branch">├─</span><span
+                                class="disc-text">Edsger Dijkstra</span></div>
+                            <div class="disc-row disc-child" style="--i:1"><span class="disc-branch">├─</span><span
+                                class="disc-text">Edgar Codd</span></div>
+                            <div class="disc-row disc-child" style="--i:2"><span class="disc-branch">├─</span><span
+                                class="disc-text">Andrew Tanenbaum</span></div>
+                            <div class="disc-row disc-child" style="--i:3"><span class="disc-branch">└─</span><span
+                                class="disc-text">Ian Sommerville</span></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="disc-row disc-child" style="--i:1"><span class="disc-branch">├─</span><span
+                          class="disc-lead" aria-hidden="true"></span><span class="disc-text">Programación</span></div>
+                      <div class="disc-row disc-child" style="--i:2"><span class="disc-branch">├─</span><span
+                          class="disc-lead" aria-hidden="true"></span><span class="disc-text">Análisis y diseño de
+                          sistemas</span></div>
+                      <div class="disc-row disc-child" style="--i:3"><span class="disc-branch">└─</span><span
+                          class="disc-lead" aria-hidden="true"></span><span class="disc-text">Bases de datos</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="disc-node" style="--i:2">
+                  <button type="button" class="disc-row disc-parent" aria-expanded="false">
+                    <span class="disc-branch">├─</span><span class="disc-caret2" aria-hidden="true"></span><span
+                      class="disc-year">2020</span><span class="disc-text">QA / Tester · trabajo formal</span>
+                  </button>
+                  <div class="disc-children">
+                    <div class="disc-children-inner">
+                      <div class="disc-row disc-child" style="--i:0"><span class="disc-branch">├─</span><span
+                          class="disc-text">Diseño de casos de prueba</span></div>
+                      <div class="disc-row disc-child" style="--i:1"><span class="disc-branch">├─</span><span
+                          class="disc-text">Herramientas de automatización</span></div>
+                      <div class="disc-row disc-child" style="--i:2"><span class="disc-branch">└─</span><span
+                          class="disc-text">Reporte de bugs</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="disc-node" style="--i:3">
+                  <button type="button" class="disc-row disc-parent" aria-expanded="false">
+                    <span class="disc-branch">├─</span><span class="disc-caret2" aria-hidden="true"></span><span
+                      class="disc-year">2020</span><span class="disc-text">Programador freelance</span>
+                  </button>
+                  <div class="disc-children">
+                    <div class="disc-children-inner">
+                      <div class="disc-row disc-child" style="--i:0"><span class="disc-branch">├─</span><span
+                          class="disc-text">Dominio técnico versátil</span></div>
+                      <div class="disc-row disc-child" style="--i:1"><span class="disc-branch">├─</span><span
+                          class="disc-text">Gestión de proyectos</span></div>
+                      <div class="disc-row disc-child" style="--i:2"><span class="disc-branch">├─</span><span
+                          class="disc-text">Adaptabilidad</span></div>
+                      <div class="disc-row disc-child" style="--i:3"><span class="disc-branch">└─</span><span
+                          class="disc-text">Control de calidad</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="disc-node" style="--i:4">
+                  <button type="button" class="disc-row disc-parent" aria-expanded="false">
+                    <span class="disc-branch">└─</span><span class="disc-caret2" aria-hidden="true"></span><span
+                      class="disc-text">Herramientas</span>
+                  </button>
+                  <div class="disc-children">
+                    <div class="disc-children-inner">
+                      <div class="disc-row disc-child" style="--i:0"><span class="disc-branch">├─</span><span
+                          class="disc-text">html</span></div>
+                      <div class="disc-row disc-child" style="--i:1"><span class="disc-branch">├─</span><span
+                          class="disc-text">css</span></div>
+                      <div class="disc-row disc-child" style="--i:2"><span class="disc-branch">├─</span><span
+                          class="disc-text">js</span></div>
+                      <div class="disc-row disc-child" style="--i:3"><span class="disc-branch">└─</span><span
+                          class="disc-text">sql</span></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Diseño -->
+        <article class="disc disc-design">
+          <button type="button" class="disc-head" aria-expanded="false">
+            <span class="disc-caret" aria-hidden="true"></span>
+            <span class="disc-headmain">
+              <span class="disc-meta"><span class="disc-path">~/diseño</span><span class="disc-lang">Lenguaje B ·
+                  02</span></span>
+              <span class="disc-name">Diseño</span>
+            </span>
+          </button>
+          <div class="disc-body">
+            <div class="disc-body-inner">
+              <p class="disc-desc">// la forma como medio de comunicación.</p>
+              <div class="disc-list">
+
+                <div class="disc-node" style="--i:0">
+                  <button type="button" class="disc-row disc-parent" aria-expanded="false">
+                    <span class="disc-branch">├─</span><span class="disc-caret2" aria-hidden="true"></span><span
+                      class="disc-year">2022</span><span class="disc-text">BIOS · Diseño Digital</span>
+                  </button>
+                  <div class="disc-children">
+                    <div class="disc-children-inner">
+                      <div class="disc-row disc-child" style="--i:0"><span class="disc-branch">├─</span><span
+                          class="disc-text">Edición y postproducción audiovisual</span></div>
+                      <div class="disc-row disc-child" style="--i:1"><span class="disc-branch">└─</span><span
+                          class="disc-text">Suite Adobe</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="disc-node" style="--i:1">
+                  <button type="button" class="disc-row disc-parent" aria-expanded="false">
+                    <span class="disc-branch">├─</span><span class="disc-caret2" aria-hidden="true"></span><span
+                      class="disc-year">2022</span><span class="disc-text">Modelado 3D</span>
+                  </button>
+                  <div class="disc-children">
+                    <div class="disc-children-inner">
+                      <div class="disc-row disc-child" style="--i:0"><span class="disc-branch">└─</span><span
+                          class="disc-text">Blender</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="disc-node" style="--i:2">
+                  <button type="button" class="disc-row disc-parent" aria-expanded="false">
+                    <span class="disc-branch">├─</span><span class="disc-caret2" aria-hidden="true"></span><span
+                      class="disc-year">2023</span><span class="disc-text">Diseñador gráfico freelance</span>
+                  </button>
+                  <div class="disc-children">
+                    <div class="disc-children-inner">
+                      <div class="disc-row disc-child" style="--i:0"><span class="disc-branch">├─</span><span
+                          class="disc-text">Versatilidad de formatos</span></div>
+                      <div class="disc-row disc-child" style="--i:1"><span class="disc-branch">├─</span><span
+                          class="disc-text">Gestión de proyectos</span></div>
+                      <div class="disc-row disc-child" style="--i:2"><span class="disc-branch">└─</span><span
+                          class="disc-text">Pensamiento conceptual y narrativo</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="disc-node" style="--i:3">
+                  <button type="button" class="disc-row disc-parent" aria-expanded="false">
+                    <span class="disc-branch">├─</span><span class="disc-caret2" aria-hidden="true"></span><span
+                      class="disc-year">2024</span><span class="disc-text">LDG · UDE Colonia</span>
+                  </button>
+                  <div class="disc-children">
+                    <div class="disc-children-inner">
+                      <div class="disc-node" style="--i:0">
+                        <button type="button" class="disc-row disc-parent" aria-expanded="false">
+                          <span class="disc-branch">├─</span><span class="disc-caret2" aria-hidden="true"></span><span
+                            class="disc-text">Autores</span>
+                        </button>
+                        <div class="disc-children">
+                          <div class="disc-children-inner">
+                            <div class="disc-row disc-child" style="--i:0"><span class="disc-branch">├─</span><span
+                                class="disc-text">Bruno Munari</span></div>
+                            <div class="disc-row disc-child" style="--i:1"><span class="disc-branch">├─</span><span
+                                class="disc-text">Jorge Frascara</span></div>
+                            <div class="disc-row disc-child" style="--i:2"><span class="disc-branch">├─</span><span
+                                class="disc-text">Donis A. Dondis</span></div>
+                            <div class="disc-row disc-child" style="--i:3"><span class="disc-branch">├─</span><span
+                                class="disc-text">Wucius Wong</span></div>
+                            <div class="disc-row disc-child" style="--i:4"><span class="disc-branch">└─</span><span
+                                class="disc-text">Victor Papanek</span></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="disc-row disc-child" style="--i:1"><span class="disc-branch">├─</span><span
+                          class="disc-lead" aria-hidden="true"></span><span class="disc-text">Diseño y expresión
+                          gráfica</span></div>
+                      <div class="disc-row disc-child" style="--i:2"><span class="disc-branch">├─</span><span
+                          class="disc-lead" aria-hidden="true"></span><span class="disc-text">Metodología
+                          proyectual</span></div>
+                      <div class="disc-row disc-child" style="--i:3"><span class="disc-branch">├─</span><span
+                          class="disc-lead" aria-hidden="true"></span><span class="disc-text">Tipografía y
+                          diagramación</span></div>
+                      <div class="disc-row disc-child" style="--i:4"><span class="disc-branch">└─</span><span
+                          class="disc-lead" aria-hidden="true"></span><span class="disc-text">Fotografía y edición
+                          digital</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="disc-node" style="--i:4">
+                  <button type="button" class="disc-row disc-parent" aria-expanded="false">
+                    <span class="disc-branch">└─</span><span class="disc-caret2" aria-hidden="true"></span><span
+                      class="disc-text">Herramientas</span>
+                  </button>
+                  <div class="disc-children">
+                    <div class="disc-children-inner">
+                      <div class="disc-row disc-child" style="--i:0"><span class="disc-branch">├─</span><span
+                          class="disc-text">Adobe</span></div>
+                      <div class="disc-row disc-child" style="--i:1"><span class="disc-branch">├─</span><span
+                          class="disc-text">Blender</span></div>
+                      <div class="disc-row disc-child" style="--i:2"><span class="disc-branch">├─</span><span
+                          class="disc-text">Tipografía</span></div>
+                      <div class="disc-row disc-child" style="--i:3"><span class="disc-branch">└─</span><span
+                          class="disc-text">Editorial</span></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         OBRAS
+    ============================================================ -->
+    <section class="zone z5" id="obras">
+      <header class="z5-header">
+        <div class="z5-tag morph-tag">// obras</div>
+        <div class="sec-title-row">
+          <span class="sec-num" aria-hidden="true">05</span>
+          <h2 class="z5-title morph-title">La <span class="tm-accent">evidencia</span></h2>
+        </div>
+        <p class="z5-intro">
+          Cada proyecto es una versión del sistema. Los mejores hacen las dos cosas:
+          resuelven un problema y comunican una idea.
+        </p>
+      </header>
+
+      <div class="z5-grid">
+        <article class="z5-card z5-card-featured">
+          <div class="z5c-num" aria-hidden="true">01</div>
+          <div class="z5c-cat morph-tag">Diseño Web</div>
+          <h3 class="z5c-title">SISTEMA — este sitio</h3>
+          <p class="z5c-desc">Manifiesto infográfico interactivo construido con HTML, CSS y JS puros. La síntesis
+            de todo el proceso.</p>
+          <div class="z5c-tools"><span>HTML</span><span>CSS</span><span>JS</span></div>
+        </article>
+        <article class="z5-card">
+          <div class="z5c-num" aria-hidden="true">02</div>
+          <div class="z5c-cat morph-tag">Diseño Gráfico</div>
+          <h3 class="z5c-title">Rebranding FAGAR</h3>
+          <p class="z5c-desc">Piezas desarrolladas en la licenciatura. Editorial, tipografía, identidad visual.</p>
+          <div class="z5c-tools"><span>Adobe</span><span>Edición</span></div>
+        </article>
+        <article class="z5-card">
+          <div class="z5c-num" aria-hidden="true">03</div>
+          <div class="z5c-cat morph-tag">MODELADO 3D</div>
+          <h3 class="z5c-title">Modelado 3D — El Legado</h3>
+          <p class="z5c-desc">Renders en Blender. Edición y postproducción.</p>
+          <div class="z5c-tools"><span>Blender</span><span>Edición</span></div>
+        </article>
+        <article class="z5-card" data-video="media/nike.mp4" data-poster="media/nike-poster.png">
+          <div class="z5c-num" aria-hidden="true">04</div>
+          <div class="z5c-cat morph-tag">Postproducción</div>
+          <h3 class="z5c-title">Reel audiovisual curso online</h3>
+          <p class="z5c-desc">Edición y postproducción de una pieza audiovisual en Premiere: montaje, ritmo, color y sonido.</p>
+          <div class="z5c-tools"><span>Premiere</span><span>Edición</span></div>
+        </article>
+      </div>
+
+      <!-- Carrusel de la obra seleccionada. Los slides los inyecta main.js -->
+      <div class="z5-carousel" id="z5-carousel" hidden aria-label="Galería de la obra">
+        <button type="button" class="z5-car-arrow z5-car-prev" aria-label="Imagen anterior">‹</button>
+        <div class="z5-car-stage">
+          <div class="z5-car-viewport">
+            <div class="z5-car-track" id="z5-car-track"></div>
+          </div>
+          <div class="z5-car-meta">
+            <span class="z5-car-title" id="z5-car-title"></span>
+            <span class="z5-car-count" id="z5-car-count"></span>
+          </div>
+        </div>
+        <button type="button" class="z5-car-arrow z5-car-next" aria-label="Imagen siguiente">›</button>
+      </div>
+    </section>
+
+    <!-- CIERRE -->
+    <section class="zone z-cierre">
+      <div class="zc-bg-word" aria-hidden="true">SISTEMA</div>
+      <div class="zc-content">
+        <blockquote class="zc-quote">
+          "El diseño de información es necesariamente diseño centrado<br>
+          en el usuario. Es ético, porque la ética se basa en el<br>
+          reconocimiento del 'otro' como diferente y respetable<br>
+          en su diferencia."
+          <cite class="zc-cite">Jorge Frascara, <em>¿Qué es el diseño de información?</em>, 2011</cite>
+        </blockquote>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Volver al inicio (por encima del footer) usa el smooth-scroll de main.js -->
+  <a href="#sistema" class="to-top" aria-label="Volver al inicio">
+    <span class="to-top-caret" aria-hidden="true"></span>
+  </a>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">SIS<em>TE</em>MA</div>
+      <div class="footer-meta">Manifiesto infográfico personal · LDG 3º · 2026 · UDE Colonia</div>
+      <div class="footer-coords">ln 97 · v2.0.26</div>
+    </div>
+  </footer>
+
+  <!-- three.js debe cargar antes de main.js (lo utiliza la esfera) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
