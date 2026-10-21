@@ -1,0 +1,177 @@
+/* ============================================================
+   SISTEMA en pantallas chicas.
+   Se carga con media="(max-width: 760px)": en escritorio no se aplica
+   nada de esto, así que esa versión queda exactamente como estaba.
+   ============================================================ */
+
+/* Sin el carril de 9.5rem a la derecha (era para la barra de progreso) */
+.zone,
+.zone:not(.z-cierre) {
+  padding: 3rem 1.25rem;
+}
+
+.progress-track,
+.progress-fill {
+  display: none;
+}
+
+/* Barra superior: logo e indicador de zona; los links no entran */
+.nav {
+  grid-template-columns: auto 1fr;
+  padding: 1rem 1.25rem;
+}
+.nav-links {
+  display: none;
+}
+.nav-state {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Las letras de los títulos animados son inline-block y el navegador podía
+   cortar en medio de una palabra ("PROPÓSI-TO"). En línea, solo corta en
+   los espacios. */
+.morph-title .char,
+.morph-label .char {
+  display: inline;
+}
+
+/* Los halos de luz con inset negativo no deben ensanchar la página */
+html,
+body {
+  overflow-x: clip;
+}
+
+/* ----- Inicio ----- */
+.z1 {
+  min-height: 0;
+  padding-top: 5.5rem;
+}
+.z1-title {
+  font-size: clamp(72px, 27vw, 120px);
+}
+.z1-meta {
+  gap: .6rem 1rem;
+  margin-bottom: 1.5rem;
+}
+.z1-quote {
+  padding-left: 1rem;
+}
+/* La esfera deja de flotar a la derecha y ocupa su propio lugar.
+   Alto fijo: el JS ajusta el canvas al alto del contenedor, y si el
+   contenedor dependiera del canvas crecería sin fin. */
+.z1-orb {
+  position: relative;
+  top: auto;
+  right: auto;
+  transform: none;
+  width: 100%;
+  max-width: none;
+  height: calc(100vw - 2.5rem);
+  margin: 1rem 0 0;
+  overflow: hidden;
+}
+.z1-orb canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Manifiesto en una sola columna */
+.z1-manifesto {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+  padding-top: 2rem;
+}
+.zm-num,
+.sec-num {
+  font-size: 64px;
+}
+.zm-para {
+  font-size: 14px;
+  line-height: 1.85;
+}
+.zm-lead {
+  font-size: 18px;
+}
+.z1-why {
+  margin-top: .5rem;
+  text-align: left;
+}
+.sec-title-row {
+  padding: 1rem 0;
+  gap: 1rem;
+}
+
+/* ----- Origen: línea de tiempo y recorridos ----- */
+.z2-origen-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+.zt-item {
+  grid-template-columns: 40px 16px minmax(0, 1fr);
+  gap: 0 .75rem;
+}
+/* La línea pasa por el centro de la columna del punto: 40 + 12 + 8 */
+.zt-line {
+  left: 59px;
+}
+.z2-geomap-stage {
+  max-width: none;
+}
+
+/* ----- Herramientas: gráfico arriba, detalle abajo ----- */
+.z-viz-layout,
+.z-viz-layout.is-detail {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5rem;
+}
+.z-viz-layout:not(.is-detail) {
+  transform: none;
+}
+.z-viz-main,
+.z-viz-layout.is-detail .z-viz-main {
+  max-width: none;
+}
+.z-viz-panel {
+  padding-left: 0;
+  padding-top: 1.25rem;
+  border-left: 0;
+  border-top: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+/* ----- Disciplinas: una carpeta debajo de la otra ----- */
+.z3-tree {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* ----- Obras ----- */
+.z5-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+.z5-card {
+  padding: 1.4rem 1.25rem;
+}
+.z5-carousel {
+  gap: .5rem;
+}
+.z5-car-arrow {
+  width: 32px;
+  height: 56px;
+}
+
+/* ----- Cierre y pie ----- */
+.z-cierre {
+  min-height: 46vh;
+  padding: 3rem 1.25rem;
+}
+.footer {
+  padding: 2rem 1.25rem;
+}
+.footer-inner {
+  flex-direction: column;
+  align-items: flex-start;
+}
