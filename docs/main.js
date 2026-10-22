@@ -47,3 +47,10 @@ for (const caja of document.querySelectorAll('.fig-video')) {
   obra.addEventListener('focusin', prender);
   obra.addEventListener('focusout', apagar);
 }
+
+/* Cuenta una reproducción del video del caso (una vez por visita) */
+for (const video of document.querySelectorAll('video[data-evento]')) {
+  video.addEventListener('play', () => {
+    window.goatcounter?.count?.({ path: video.dataset.evento, title: video.dataset.evento, event: true });
+  }, { once: true });
+}
